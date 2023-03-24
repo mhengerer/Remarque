@@ -1,37 +1,43 @@
-const { Schema, Types } = require("mongoose");
-
+const { Schema, model } = require("mongoose");
 
 const notecardSchema = new Schema({
- 
-    notecardId: {
-    type: Schema.Types.ObjectId,
-    default: () => new Types.ObjectId(),
+  // Header of the notecard
+  title: {
+    type: String,
+    default: "Note",
+    trim: true,
   },
-  //   authors: [
-  //     {
-  //       type: String,
-  //     },
-  //   ],
-  //   description: {
-  //     type: String,
-  //     required: true,
-  //   },
-
-  //   bookId: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   image: {
-  //     type: String,
-  //   },
-  //   link: {
-  //     type: String,
-  //   },
-  //   title: {
-  //     type: String,
-  //     required: true,
-  //   },
+  // Body text of the notecard
+  body: [
+    {
+      type: String,
+    },
+  ],
+  // i: Grid item property for referencing
+  // Coordinates of the item on the grid
+  // x: Columns
+  // y: Pixels
+  // Size of the notecard item, for use with react-grid-layout
+  // w: Columns
+  // h: Pixels
+  i: {
+    type: String,
+    required: true,
+  },
+  x: {
+    type: Number,
+  },
+  y: {
+    type: Number,
+  },
+  w: {
+    type: Number,
+  },
+  h: {
+    type: Number,
+  },
 });
 
-module.exports = notecardSchema;
+const Notecard = model("Notecard", notecardSchema);
 
+module.exports = Notecard;

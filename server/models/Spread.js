@@ -1,34 +1,23 @@
 const { Schema, model } = require("mongoose");
-const notecardSchema = require("./Notecard")
 
-// This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedBooks` array in User.js
+const Notecard = require("./Notecard");
+
 const spreadSchema = new Schema({
-  notecards: [
-   notecardSchema
+  dates: [
+    {
+      type: Date,
+      // The surrounding Monday through Sunday of the current day
+      default: Date.now,
+    },
   ],
-    plannerText: {
-    type: String,
-    required: true,
-  },
-
-//   bookId: {
-//     type: String,
-//     required: true,
-//   },
-//   image: {
-//     type: String,
-//   },
-//   link: {
-//     type: String,
-//   },
-//   title: {
-//     type: String,
-//     required: true,
-//   },
+  plannerItems: [
+    {
+      type: String,
+    },
+  ],
+  gridItems: [Notecard.schema],
 });
 
-
-const Spread = model('spread',spreadSchema)
-
+const Spread = model("Spread", spreadSchema);
 
 module.exports = Spread;
