@@ -229,15 +229,15 @@ Use this space to list resources you find helpful and would like to give credit 
 
 [contributors-shield]: https://img.shields.io/github/contributors/mhengerer/Remarque.svg?style=for-the-badge
 [contributors-url]: https://github.com/mhengerer/Remarque/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/mhengerer/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/mhengerer/Remarque.svg?style=for-the-badge
 [forks-url]: https://github.com/mhengerer/Remarque/network/members
-[stars-shield]: https://img.shields.io/github/stars/mhengerer/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/mhengerer/Remarque.svg?style=for-the-badge
 [stars-url]: https://github.com/mhengerer/Remarque/stargazers
-[issues-shield]: https://img.shields.io/github/issues/mhengerer/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/mhengerer/Remarque.svg?style=for-the-badge
 [issues-url]: https://github.com/mhengerer/Remarqueissues
 [cr-shield]: https://img.shields.io/github/issues-pr-closed-raw/mhengerer/Remarque.svg?style=for-the-badge
 [cr-url]: https://github.com/mhengerer/Remarque/pulls?q=is%3Apr+is%3Aclosed
-[license-shield]: https://img.shields.io/github/license/mhengerer/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/mhengerer/Remarque.svg?style=for-the-badge
 [license-url]: https://github.com/mhengerer/Remarque/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png
 [vite.js]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
