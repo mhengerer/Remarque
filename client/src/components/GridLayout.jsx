@@ -1,4 +1,9 @@
-import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
+import React from "react";
+import { Responsive, WidthProvider } from "react-grid-layout";
+import "../../node_modules/react-grid-layout/css/styles.css";
+import "../../node_modules/react-resizable/css/styles.css";
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const styles = {
   border: {
@@ -7,47 +12,43 @@ const styles = {
   },
 };
 
-const MyFirstGrid = () => {
-  const layout = [
-    { i: "a", x: 0, y: 0, w: 6, h: 2, static: "true"},
-    { i: "b", x: 0, y: 0, w: 6, h: 2, static: "true"},
-    { i: "c", x: 0, y: 0, w: 6, h: 2, static: "true"},
-    { i: "d", x: 0, y: 0, w: 6, h: 2, static: "true"},
-    { i: "e", x: 0, y: 0, w: 6, h: 2, static: "true"},
-    { i: "f", x: 0, y: 0, w: 3, h: 2, static: "true"},
-    { i: "g", x: 0, y: 0, w: 3, h: 2, static: "true"}
-];
+const Layout = (props) => {
+  const [items, setItems] = React.useState([
+    { i: "a", x: 0, y: 0, w: 1, h: 1 },
+    { i: "b", x: 2, y: 0, w: 1, h: 1 },
+    { i: "c", x: 0, y: 0, w: 1, h: 1 },
+    { i: "d", x: 2, y: 0, w: 1, h: 1 },
+    { i: "e", x: 0, y: 0, w: 1, h: 1 },
+    { i: "f", x: 2, y: 0, w: 1, h: 1 },
+  ]);
+
   return (
     <ResponsiveGridLayout
       className="layout"
-      layout={layout}
+      layouts={{ lg: items }}
       breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-      cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-      margin={[0, 0]}
-      width={1200}
+      cols={{ lg: 5, md: 4, sm: 3, xs: 2, xxs: 1 }}
+      rowHeight={300}
+      width={1000}
+      margin={[0,0]}
+      resizeHandles={["se"]}
     >
-      <div key="a" style={styles.border}>
-        Monday
-      </div>
-      <div key="b" style={styles.border}>
-        Tuesday
-      </div>
-      <div key="c" style={styles.border}>
-        Wednesday
-      </div>
-      <div key="d" style={styles.border}>
-        Thursday
-      </div>
-      <div key="e" style={styles.border}>
-        Friday
-      </div>
-      <div key="f" style={styles.border}>
-        Saturday
-      </div>
-      <div key="g" style={styles.border}>
-        Sunday
-      </div>
+      {items.map((item) => {
+        return (
+          <div
+            key={item.i}
+            style={styles.border}
+            data-grid={{ x: item.x, y: item.y }}
+          >
+            {item.i}
+          </div>
+        );
+      })}
     </ResponsiveGridLayout>
   );
 };
-export default MyFirstGrid;
+
+const GridLayout = () => {
+  return <Layout />;
+};
+export default GridLayout;

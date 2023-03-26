@@ -1,10 +1,18 @@
 import React from "react";
+import Weekday from "./Weekday";
 
 const Planner = () => {
   return (
-    <div className="w-full grid grid-cols-4 p-8 grid-flow-row gap-4 text-center">
-      <div className="border p-3">1</div>
-      <div className="border p-3">2</div>
+    <div className="w-full grid grid-cols-1 grid-flow-row text-left">
+      <Weekday />
+      <Weekday />
+      <Weekday />
+      <Weekday />
+      <Weekday />
+      <div className="w-full grid grid-cols-2 grid-flow-row text-left">
+        <Weekday />
+        <Weekday />
+      </div>
     </div>
   );
 };

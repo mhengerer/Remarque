@@ -1,3 +1,3 @@
 import Planner from "./Planner";
-import MyFirstGrid from "./GridLayout";
-export {Planner, MyFirstGrid};
+import GridLayout from "./GridLayout";
+export {Planner, GridLayout};

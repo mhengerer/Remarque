@@ -1,5 +1,5 @@
 import React from "react";
-import { MyFirstGrid, Planner } from "./components";
+import { GridLayout, Planner } from "./components";
 import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
@@ -7,7 +7,7 @@ const App = () => {
     <BrowserRouter>
       <div className="App">
         <Planner />
-        <MyFirstGrid />
+        <GridLayout />
       </div>
     </BrowserRouter>
   );
