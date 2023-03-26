@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./src/**/*.{jsx,js}"],
+  mode:"jit",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        dmSans: ["DM Sans", "sans-serif"]
+      },
+      display: ["group-hover"],
+      background: ["bg-sky-100"]
+    },
   },
   plugins: [],
 }
