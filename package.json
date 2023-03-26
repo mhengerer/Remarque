@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite", 
-    "build": "vite build", 
-    "preview": "vite preview" 
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "concurrently": "^7.6.0",
+    "daisyui": "^2.51.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
