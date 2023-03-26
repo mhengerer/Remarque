@@ -1,6 +1,5 @@
-import React from "react";
-import { MyFirstGrid, Planner } from "./components";
 import { BrowserRouter } from "react-router-dom";
+import { MyFirstGrid, Planner } from "./components";
 
 const App = () => {
   return (
