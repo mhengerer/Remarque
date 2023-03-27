@@ -1,29 +1,29 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  type Notecard {
+  type GridItem {
     _id: ID
     title: String
     body: [String]!
-    i: Int 
+    i: Int
     x: Int
-    y: Int 
-    w: Int 
-    h: Int 
+    y: Int
+    w: Int
+    h: Int
   }
 
   type Spread {
     _id: ID
-    dates: [Date]
+    dates: [String]
     plannerItems: [String]!
-    gridItems: [Notecard]
+    gridItems: [GridItem]
   }
 
   type User {
     _id: ID
     username: String
     email: String
-    password: String 
+    password: String
     spreads: [Spread]
   }
 
@@ -33,11 +33,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
     user: User
-    order(_id: ID!): Order
   }
 
   type Mutation {
@@ -47,14 +43,24 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(
-      firstName: String
-      lastName: String
-      email: String
-      password: String
-    ): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+    addSpread(
+      dates: [String]
+      plannerItems: [String]
+      gridItems: [String]
+    ): Spread
+    updatePlannerItem(_id: ID!, plannerItems: String!): Spread
+    addPlannerItem(plannerItems: String!): Spread
+    updateGridItem(
+      _id: ID!
+      title: String!
+      body: [String]!
+      i: Int!
+      x: Int!
+      y: Int!
+      w: Int!
+      h: Int!
+    ): GridItem
+    updateUser(username: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
   }
 `;
