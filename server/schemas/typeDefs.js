@@ -34,15 +34,11 @@ const typeDefs = gql`
 
   type Query {
     user: User
+    allUsers: [User]
   }
 
   type Mutation {
-    addUser(
-      firstName: String!
-      lastName: String!
-      email: String!
-      password: String!
-    ): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     addSpread(
       dates: [String]
       plannerItems: [String]
