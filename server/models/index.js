@@ -1,7 +1,5 @@
 const User = require("./User");
 const Spread = require("./Spread");
-const Notecard = require("./GridItem");
+const GridItem = require("./GridItem");
 
-module.exports = { User, Spread, Notecard };
-
-module.exports = { User };
+module.exports = { User, Spread, GridItem };

@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const Notecard = require("./GridItem");
+const GridItem = require("./GridItem");
 
 const spreadSchema = new Schema({
   dates: [
@@ -15,7 +15,7 @@ const spreadSchema = new Schema({
       type: String,
     },
   ],
-  gridItems: [Notecard.schema],
+  gridItems: [GridItem.schema],
 });
 
 const Spread = model("Spread", spreadSchema);
