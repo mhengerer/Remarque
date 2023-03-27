@@ -1,17 +1,63 @@
 import React from "react";
 import { GridLayout, Planner } from "./components";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import "./beep.css";
+
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <div className="w-full  text-left">
-          <GridLayout />
+    <ApolloProvider client={client}>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/"
+              element={
+                <div className="grid grid-cols-2 grid-flow-row">
+                  <div className="w-full  text-left">
+                    <Planner />
+                  </div>
+                  <div className="w-full  text-left">
+                    <GridLayout />
+                  </div>
+                  <button></button>
+                </div>
+              }
+            />
+          </Routes>
         </div>
-      </div>
-    </BrowserRouter>
+      </Router>
+    </ApolloProvider>
   );
 };
 

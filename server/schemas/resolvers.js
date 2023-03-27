@@ -5,13 +5,16 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
+      const user = await User.findById(context.user._id);
 
-        return user;
-      }
+      return user;
 
-      throw new AuthenticationError("Not logged in");
+      //throw new AuthenticationError("Not logged in");
+    },
+    allUsers: async (parent, args, context) => {
+      const users = await User.find({});
+
+      return users;
     },
   },
   Mutation: {
@@ -41,7 +44,9 @@ const resolvers = {
     // TODO: Unbreak this
     updateGridItem: async (parent, args, context) => {
       if (context.user) {
-        return await GridItem.findByIdAndUpdate(context.grid_item._id, args, { new: true });
+        return await GridItem.findByIdAndUpdate(context.grid_item._id, args, {
+          new: true,
+        });
       }
 
       throw new AuthenticationError("Not logged in");
