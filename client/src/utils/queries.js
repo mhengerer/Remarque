@@ -1,29 +1,30 @@
-
-
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
-{
-    query User {
-    user {
-      _id
-      email
-      password
-      spreads {
+  {
+    query
+    User {
+      user {
         _id
-        dates
-        gridItems {
-          body
+        email
+        password
+        spreads {
           _id
-          h
-          i
-          title
-          w
-          x
-          y
+          dates
+          gridItems {
+            body
+            _id
+            h
+            i
+            title
+            w
+            x
+            y
+          }
+          plannerItems
         }
-        plannerItems
+        username
       }
-      username
     }
   }
-}
+`;
