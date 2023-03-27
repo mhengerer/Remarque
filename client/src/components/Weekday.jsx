@@ -11,7 +11,7 @@ const Weekday = () => {
       <textarea
         type="text"
         placeholder="Type here"
-        className="flex textarea textarea-bordered textarea-lg w-full max-w-xs"
+        className="flex textarea textarea-bordered textarea-lg w-full"
       />
     </div>
   );
