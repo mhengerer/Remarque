@@ -41,14 +41,7 @@ const resolvers = {
     // TODO: Unbreak this
     updateGridItem: async (parent, args, context) => {
       if (context.user) {
-        return await Spread.findByIdAndUpdate(
-          {
-            _id: mongoose.Types.ObjectId(req.params.spread_id),
-            gridItems: mongoose.Types.ObjectId(req.params.grid_id),
-          },
-          { $set: { "gridItems.$.paid": true } },
-          { returnOriginal: false }
-        );
+        return await GridItem.findByIdAndUpdate(context.grid_item._id, args, { new: true });
       }
 
       throw new AuthenticationError("Not logged in");
