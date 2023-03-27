@@ -63,7 +63,7 @@ const Todo = () => {
                 <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
                 <input type="radio" name="rating-2" className="mask mask-star-2 bg-red-400" />
               </div></td>
-              <td><input type="checkbox" className="checkbox content-center" /></td>
+              <td><input type="checkbox" className="checkbox" /></td>
             </tr>
             {/* row 3 */}
             <tr>
