@@ -36,11 +36,11 @@ const resolvers = {
     // -Location of the grid items on the page
     addSpread: async (parent, { date, plannerItems, gridItems }, context) => {
       if (context.user) {
-        const mondayISO = getPreviousMonday(date);
-        const sundayISO = getNextSunday(date);
-        const spread = new Spread({
-          mondayISO,
-          sundayISO,
+        const monday = getPreviousMonday(date);
+        const sunday = getNextSunday(date);
+        const spread = await Spread.create({
+          monday,
+          sunday,
           plannerItems,
           gridItems,
         });
@@ -55,9 +55,26 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     // TODO: Write this
-    updatePlannerItem: async (parent, args, context) => {},
+    updateSpread: async (parent, args, context) => {},
     // TODO: Write this
-    addPlannerItem: async (parent, args, context) => {},
+    addGridItem: async (
+      parent,
+      { title, body, x, y, h, w, i, spreadId },
+      context
+    ) => {
+      if (context.user) {
+        // Set items in exact order of model
+        const gridItem = await GridItem.create({ title, body, x, y, h, w, i });
+
+        await Spread.findByIdAndUpdate(spreadId, {
+          $push: { gridItems: gridItem },
+        });
+
+        return gridItem;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
     // TODO: Unbreak this
     updateGridItem: async (parent, args, context) => {
       if (context.user) {
@@ -69,6 +86,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     // Update user profile
+    // TODO: Take a second look at this method
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {

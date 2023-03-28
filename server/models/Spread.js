@@ -16,7 +16,13 @@ const spreadSchema = new Schema({
       type: String,
     },
   ],
-  gridItems: [GridItem.schema],
+  // Do an include when you want to pull the griditems as well
+  gridItems: [
+    {
+      type: Schema.Types.ObjectId, 
+      ref: "GridItem"
+    }
+  ]
 });
 
 const Spread = model("Spread", spreadSchema);

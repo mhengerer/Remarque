@@ -45,8 +45,17 @@ const typeDefs = gql`
       plannerItems: [String]
       gridItems: [String]
     ): Spread
-    updatePlannerItem(_id: ID!, plannerItems: String!): Spread
-    addPlannerItem(plannerItems: String!): Spread
+    updateSpread(_id: ID): Spread
+    addGridItem(
+      title: String!
+      body: String
+      i: Int!
+      x: Int
+      y: Int
+      w: Int
+      h: Int
+      spreadId: ID!
+    ): Spread
     updateGridItem(
       _id: ID!
       title: String!
