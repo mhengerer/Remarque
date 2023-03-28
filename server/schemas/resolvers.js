@@ -1,9 +1,11 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Spread, GridItem } = require("../models");
 const { signToken } = require("../utils/auth");
+const { getPreviousMonday, getNextSunday } = require("../utils/weekCalc");
 
 const resolvers = {
   Query: {
+    // QCed
     user: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
 
@@ -11,6 +13,7 @@ const resolvers = {
 
       //throw new AuthenticationError("Not logged in");
     },
+    // QCed
     allUsers: async (parent, args, context) => {
       const users = await User.find({});
 
@@ -19,6 +22,7 @@ const resolvers = {
   },
   Mutation: {
     // Create new user
+    // QCed
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -26,9 +30,11 @@ const resolvers = {
       return { token, user };
     },
     // Add new spread as a subdocument to user model
-    addSpread: async (parent, { dates, plannerItems, gridItems }, context) => {
+    addSpread: async (parent, { plannerItems, gridItems }, context) => {
       if (context.user) {
-        const spread = new Spread({ dates, plannerItems, gridItems });
+        const monday = getPreviousMonday();
+        const sunday = getNextSunday();
+        const spread = new Spread({ monday, sunday, plannerItems, gridItems });
 
         await User.findByIdAndUpdate(context.user._id, {
           $push: { spreads: spread },
@@ -39,7 +45,9 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    // TODO: Write this
     updatePlannerItem: async (parent, args, context) => {},
+    // TODO: Write this
     addPlannerItem: async (parent, args, context) => {},
     // TODO: Unbreak this
     updateGridItem: async (parent, args, context) => {
