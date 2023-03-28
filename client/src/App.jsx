@@ -45,9 +45,6 @@ const App = () => {
               element={
                 <div className="grid grid-cols-2 grid-flow-row">
                   <div className="w-full  text-left">
-                    <Planner />
-                  </div>
-                  <div className="w-full  text-left">
                     <GridLayout />
                   </div>
                   <button></button>
