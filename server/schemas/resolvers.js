@@ -56,7 +56,7 @@ const resolvers = {
     },
     // TODO: Write this
     updateSpread: async (parent, args, context) => {},
-    // TODO: Write this
+    // QCed
     addGridItem: async (
       parent,
       { title, body, x, y, h, w, i, spreadId },
