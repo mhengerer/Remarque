@@ -1,7 +1,6 @@
 import React from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { Card, Table, Todo } from "./Cards.jsx";
-import Planner from "./Planner.jsx"
+import { Planner, Card, Table, Todo } from "./grid Items/index.js";
 import "../../node_modules/react-grid-layout/css/styles.css";
 import "../../node_modules/react-resizable/css/styles.css";
 

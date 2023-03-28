@@ -1,5 +1,4 @@
 import React from "react";
-import { GridLayout } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -12,6 +11,7 @@ import "./beep.css";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Journal from "./pages/Journal";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -40,17 +40,7 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route
-              path="/"
-              element={
-                <div className="grid grid-flow-row">
-                  <div className="w-full  text-left">
-                    <GridLayout />
-                  </div>
-                  <button></button>
-                </div>
-              }
-            />
+            <Route path="/" element={<Journal />} />
           </Routes>
         </div>
       </Router>
