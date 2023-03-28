@@ -1,5 +1,5 @@
 import React from "react";
-import { GridLayout, Planner } from "./components";
+import { GridLayout } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
