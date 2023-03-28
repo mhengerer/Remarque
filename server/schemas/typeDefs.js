@@ -14,7 +14,8 @@ const typeDefs = gql`
 
   type Spread {
     _id: ID
-    dates: [String]
+    monday: Date!
+    sunday: Date!
     plannerItems: [String]!
     gridItems: [GridItem]
   }
