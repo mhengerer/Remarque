@@ -30,11 +30,20 @@ const resolvers = {
       return { token, user };
     },
     // Add new spread as a subdocument to user model
-    addSpread: async (parent, { plannerItems, gridItems }, context) => {
+    // Takes in 3 parameters:
+    // -Referenced date for making the new spread
+    // -Planner items that the user has saved
+    // -Location of the grid items on the page
+    addSpread: async (parent, { date, plannerItems, gridItems }, context) => {
       if (context.user) {
-        const monday = getPreviousMonday();
-        const sunday = getNextSunday();
-        const spread = new Spread({ monday, sunday, plannerItems, gridItems });
+        const monday = getPreviousMonday(date);
+        const sunday = getNextSunday(date);
+        const spread = await Spread.create({
+          monday,
+          sunday,
+          plannerItems,
+          gridItems,
+        });
 
         await User.findByIdAndUpdate(context.user._id, {
           $push: { spreads: spread },
@@ -46,9 +55,26 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     // TODO: Write this
-    updatePlannerItem: async (parent, args, context) => {},
-    // TODO: Write this
-    addPlannerItem: async (parent, args, context) => {},
+    updateSpread: async (parent, args, context) => {},
+    // QCed
+    addGridItem: async (
+      parent,
+      { title, body, x, y, h, w, i, spreadId },
+      context
+    ) => {
+      if (context.user) {
+        // Set items in exact order of model
+        const gridItem = await GridItem.create({ title, body, x, y, h, w, i });
+
+        await Spread.findByIdAndUpdate(spreadId, {
+          $push: { gridItems: gridItem },
+        });
+
+        return gridItem;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
     // TODO: Unbreak this
     updateGridItem: async (parent, args, context) => {
       if (context.user) {
@@ -60,6 +86,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     // Update user profile
+    // TODO: Take a second look at this method
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {

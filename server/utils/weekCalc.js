@@ -1,16 +1,19 @@
 module.exports = {
-  getPreviousMonday: (date) => {
-    const day = date.getDay();
-    const diff = day === 0 ? 6 : day - 1;
-    const prevMonday = new Date(date);
-    prevMonday.setDate(date.getDate() - diff);
+  // TODO: This broke
+  getPreviousMonday: (dateString) => {
+    const dayObj = new Date(dateString);
+    const weekday = dayObj.getDay();
+    const diff = dateString === 0 ? 6 : weekday - 1;
+    const prevMonday = new Date(diff);
+    prevMonday.setDate(dayObj.getDate() - diff);
     return prevMonday;
   },
-  getNextSunday: (date) => {
-    const dayOfWeek = date.getDay();
+  getNextSunday: (dateString) => {
+    const dayObj = new Date(dateString);
+    const dayOfWeek = dayObj.getDay();
     const daysUntilNextSunday = 7 - dayOfWeek;
     const nextSunday = new Date(
-      date.getTime() + daysUntilNextSunday * 24 * 60 * 60 * 1000
+      dayObj.getTime() + daysUntilNextSunday * 24 * 60 * 60 * 1000
     );
     return nextSunday;
   },

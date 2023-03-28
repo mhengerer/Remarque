@@ -4,11 +4,11 @@ const GridItem = require("./GridItem");
 
 const spreadSchema = new Schema({
   monday: {
-    type: Date,
+    type: String,
     required: true,
   },
   sunday: {
-    type: Date,
+    type: String,
     required: true,
   },
   plannerItems: [
@@ -16,7 +16,13 @@ const spreadSchema = new Schema({
       type: String,
     },
   ],
-  gridItems: [GridItem.schema],
+  // Do an include when you want to pull the griditems as well
+  gridItems: [
+    {
+      type: Schema.Types.ObjectId, 
+      ref: "GridItem"
+    }
+  ]
 });
 
 const Spread = model("Spread", spreadSchema);
