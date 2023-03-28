@@ -14,8 +14,8 @@ const typeDefs = gql`
 
   type Spread {
     _id: ID
-    monday: Date!
-    sunday: Date!
+    monday: String!
+    sunday: String!
     plannerItems: [String]!
     gridItems: [GridItem]
   }
@@ -41,7 +41,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     addSpread(
-      dates: [String]
+      date: String!
       plannerItems: [String]
       gridItems: [String]
     ): Spread

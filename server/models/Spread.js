@@ -4,11 +4,11 @@ const GridItem = require("./GridItem");
 
 const spreadSchema = new Schema({
   monday: {
-    type: Date,
+    type: String,
     required: true,
   },
   sunday: {
-    type: Date,
+    type: String,
     required: true,
   },
   plannerItems: [

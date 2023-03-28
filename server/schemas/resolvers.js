@@ -30,11 +30,20 @@ const resolvers = {
       return { token, user };
     },
     // Add new spread as a subdocument to user model
-    addSpread: async (parent, { plannerItems, gridItems }, context) => {
+    // Takes in 3 parameters:
+    // -Referenced date for making the new spread
+    // -Planner items that the user has saved
+    // -Location of the grid items on the page
+    addSpread: async (parent, { date, plannerItems, gridItems }, context) => {
       if (context.user) {
-        const monday = getPreviousMonday();
-        const sunday = getNextSunday();
-        const spread = new Spread({ monday, sunday, plannerItems, gridItems });
+        const mondayISO = getPreviousMonday(date);
+        const sundayISO = getNextSunday(date);
+        const spread = new Spread({
+          mondayISO,
+          sundayISO,
+          plannerItems,
+          gridItems,
+        });
 
         await User.findByIdAndUpdate(context.user._id, {
           $push: { spreads: spread },
