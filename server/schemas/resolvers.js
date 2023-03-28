@@ -1,9 +1,11 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Spread, GridItem } = require("../models");
 const { signToken } = require("../utils/auth");
+const { getPreviousMonday, getNextSunday } = require("../utils/weekCalc");
 
 const resolvers = {
   Query: {
+    // QCed
     user: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
 
@@ -11,6 +13,7 @@ const resolvers = {
 
       //throw new AuthenticationError("Not logged in");
     },
+    // QCed
     allUsers: async (parent, args, context) => {
       const users = await User.find({});
 
@@ -19,6 +22,7 @@ const resolvers = {
   },
   Mutation: {
     // Create new user
+    // QCed
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -26,9 +30,20 @@ const resolvers = {
       return { token, user };
     },
     // Add new spread as a subdocument to user model
-    addSpread: async (parent, { dates, plannerItems, gridItems }, context) => {
+    // Takes in 3 parameters:
+    // -Referenced date for making the new spread
+    // -Planner items that the user has saved
+    // -Location of the grid items on the page
+    addSpread: async (parent, { date, plannerItems, gridItems }, context) => {
       if (context.user) {
-        const spread = new Spread({ dates, plannerItems, gridItems });
+        const monday = getPreviousMonday(date);
+        const sunday = getNextSunday(date);
+        const spread = await Spread.create({
+          monday,
+          sunday,
+          plannerItems,
+          gridItems,
+        });
 
         await User.findByIdAndUpdate(context.user._id, {
           $push: { spreads: spread },
@@ -39,8 +54,27 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    updatePlannerItem: async (parent, args, context) => {},
-    addPlannerItem: async (parent, args, context) => {},
+    // TODO: Write this
+    updateSpread: async (parent, args, context) => {},
+    // QCed
+    addGridItem: async (
+      parent,
+      { title, body, x, y, h, w, i, spreadId },
+      context
+    ) => {
+      if (context.user) {
+        // Set items in exact order of model
+        const gridItem = await GridItem.create({ title, body, x, y, h, w, i });
+
+        await Spread.findByIdAndUpdate(spreadId, {
+          $push: { gridItems: gridItem },
+        });
+
+        return gridItem;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
     // TODO: Unbreak this
     updateGridItem: async (parent, args, context) => {
       if (context.user) {
@@ -52,6 +86,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     // Update user profile
+    // TODO: Take a second look at this method
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {

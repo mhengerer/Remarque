@@ -1,4 +1,5 @@
 import Planner from "./Planner";
 import GridLayout from "./GridLayout";
 import Navbar from "./Navbar";
-export {Navbar, Planner, GridLayout};
+import splashScreen from "./SplashScreen";
+export {Navbar, Planner, GridLayout, splashScreen};

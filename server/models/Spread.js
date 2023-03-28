@@ -3,19 +3,26 @@ const { Schema, model } = require("mongoose");
 const GridItem = require("./GridItem");
 
 const spreadSchema = new Schema({
-  dates: [
-    {
-      type: Date,
-      // The surrounding Monday through Sunday of the current day
-      default: Date.now,
-    },
-  ],
+  monday: {
+    type: String,
+    required: true,
+  },
+  sunday: {
+    type: String,
+    required: true,
+  },
   plannerItems: [
     {
       type: String,
     },
   ],
-  gridItems: [GridItem.schema],
+  // Do an include when you want to pull the griditems as well
+  gridItems: [
+    {
+      type: Schema.Types.ObjectId, 
+      ref: "GridItem"
+    }
+  ]
 });
 
 const Spread = model("Spread", spreadSchema);
