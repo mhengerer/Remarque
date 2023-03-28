@@ -55,6 +55,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        
         <a className="btn btn-ghost normal-case hidden lg:flex text-xl">Remarque</a>
       </div>
       <div className="navbar-center lg:flex">
