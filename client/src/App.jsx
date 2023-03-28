@@ -43,7 +43,7 @@ const App = () => {
             <Route
               path="/"
               element={
-                <div className="grid grid-cols-2 grid-flow-row">
+                <div className="grid grid-flow-row">
                   <div className="w-full  text-left">
                     <GridLayout />
                   </div>
