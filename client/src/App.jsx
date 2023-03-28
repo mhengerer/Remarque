@@ -1,5 +1,5 @@
 import React from "react";
-import { GridLayout, Planner } from "./components";
+import { GridLayout, Navbar } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -44,6 +44,7 @@ const App = () => {
               path="/"
               element={
                 <div className="grid grid-flow-row">
+                  <Navbar />
                   <div className="w-full  text-left">
                     <GridLayout />
                   </div>
