@@ -5,25 +5,30 @@ import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 import { splashScreen } from "./components";
 
-function Signup(props) {
-  const [formState, setFormState] = useState({ email: "", password: "" });
+const Signup = () => {
+  const [formState, setFormState] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        username: formState.username,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+    try {
+      const { data } = await addUser({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log(formState);
     setFormState({
       ...formState,
       [name]: value,
@@ -39,10 +44,10 @@ function Signup(props) {
         <div className="">
           <label htmlFor="username">Username:</label>
           <input
-            placeholder="First"
+            placeholder="username"
             name="username"
             type="text"
-            id="username"
+            value={formState.name}
             onChange={handleChange}
           />
         </div>
@@ -53,7 +58,7 @@ function Signup(props) {
             placeholder="youremail@test.com"
             name="email"
             type="email"
-            id="email"
+            value={formState.email}
             onChange={handleChange}
           />
         </div>
@@ -63,7 +68,7 @@ function Signup(props) {
             placeholder="******"
             name="password"
             type="password"
-            id="pwd"
+            value={formState.password}
             onChange={handleChange}
           />
         </div>
@@ -73,6 +78,6 @@ function Signup(props) {
       </form>
     </div>
   );
-}
+};
 
 export default Signup;
