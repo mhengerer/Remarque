@@ -4,7 +4,7 @@ import React from "react";
 
 const Weekday = () => {
   return (
-    <div className="w-full grid grid-cols-1 grid-flow-row text-left border-4 border-black">
+    <div className="w-full grid grid-cols-1 grid-flow-row text-left border-4 border-base-300">
       <label className="label">
         <span className=" text-white label-text">Monday 03/25</span>
       </label>
