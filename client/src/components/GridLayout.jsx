@@ -36,9 +36,8 @@ const Layout = (props) => {
     >
       {items.map((item) => {
         return (
-          <div
+          <div className="border-4 border-base-300"
             key={item.i}
-            style={styles.border}
             data-grid={{ x: item.x, y: item.y }}
           >
             {item.card}
