@@ -12,12 +12,18 @@ const typeDefs = gql`
     h: Int
   }
 
+  type PlannerItem {
+    _id: ID
+    body: String
+    dayOfCurrentMonth: Int!
+  } 
+
   type Spread {
     _id: ID
     monday: String!
     sunday: String!
-    plannerItems: [String]!
-    gridItems: [GridItem]
+    plannerItems: [PlannerItem]!
+    gridItems: [GridItem]!
   }
 
   type User {
@@ -55,7 +61,7 @@ const typeDefs = gql`
       w: Int
       h: Int
       spreadId: ID!
-    ): Spread
+    ): GridItem
     updateGridItem(
       _id: ID!
       title: String!
@@ -66,6 +72,10 @@ const typeDefs = gql`
       w: Int!
       h: Int!
     ): GridItem
+    addPlannerItem(
+      spreadId: ID!
+      body: String
+    ): PlannerItem
     updateUser(username: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
   }
