@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Spread, GridItem } = require("../models");
+const { User, Spread, GridItem, PlannerItem } = require("../models");
 const { signToken } = require("../utils/auth");
 const { getPreviousMonday, getNextSunday } = require("../utils/weekCalc");
 
@@ -54,8 +54,19 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    // TODO: Write this
-    updateSpread: async (parent, args, context) => {},
+
+    addPlannerItem: async (parent, {spreadId, body}, context) => {
+      if (context.user) {
+        // Set items in exact order of model
+        const plannerItem = await PlannerItem.create({ body });
+
+        await Spread.findByIdAndUpdate(spreadId, {
+          $push: { plannerItems: plannerItem },
+        });
+
+        return plannerItem
+      }
+    }, 
     // QCed
     addGridItem: async (
       parent,
@@ -120,5 +131,14 @@ const resolvers = {
     // },
   },
 };
+
+    // TODO: Write this
+  //   updateSpread: async (parent, {plannerItems, _id}, context) => {
+  //     if (context.user) {
+  //       return await Spread.findByIdAndUpdate(_id, {planner : {}}, {
+  //         new: true,
+  //       });
+  //   }
+  // },
 
 module.exports = resolvers;
