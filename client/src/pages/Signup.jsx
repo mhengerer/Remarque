@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
-// import { splashScreen } from "./components";
+import { Modal } from "../components/index";
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -37,6 +37,7 @@ const Signup = () => {
 
   return (
     <div className="">
+      <Modal />
       <Link to="/login">← Go to Login</Link>
 
       <h2>Signup</h2>
