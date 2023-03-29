@@ -1,4 +1,5 @@
 import GridLayout from "./GridLayout";
 import Navbar from "./Navbar";
-import splashScreen from "./SplashScreen";
-export {Navbar, GridLayout, splashScreen};
+import SplashScreen from "./SplashScreen";
+import Modal from "./Modal";
+export {Navbar, GridLayout, SplashScreen, Modal};
