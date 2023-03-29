@@ -23,9 +23,9 @@ const Modal = () => {
                     The perfect digital tool for everyday planning.
                   </p>
                   <div className="modal-action"></div>
-                  <button htmlFor="my-modal" className="btn btn-primary">
+                  <label htmlFor="my-modal" className="btn btn-primary">
                     Get Started
-                  </button>
+                  </label>
                 </div>
               </div>
             </div>
