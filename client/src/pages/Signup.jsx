@@ -36,48 +36,67 @@ const Signup = () => {
   };
 
   return (
-    <div className="">
-      <Modal />
-      <Link to="/login">← Go to Login</Link>
-
-      <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="">
-          <label htmlFor="username">Username:</label>
-          <input
+    <div className="hero min-h-screen bg-base-200">
+  <div className="hero-content flex-col lg:flex-row-reverse">
+    <div className="text-center lg:text-left">
+      <Modal/>
+      <h1 className="text-5xl font-bold">Sign Up!</h1>
+      <p className="py-6">Create an account to make your digital bullet dreams come to life!</p>
+    </div>
+    <form onSubmit={handleFormSubmit}>
+    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div className="card-body">
+        
+        <div className="form-control">
+          <label htmlFor="username" className="label">
+            <span className="label-text">Username</span>
+          </label>
+          <input 
             placeholder="username"
             name="username"
             type="text"
             value={formState.name}
             onChange={handleChange}
-          />
+            className="input input-bordered" />
         </div>
 
-        <div className="">
-          <label htmlFor="email">Email:</label>
-          <input
-            placeholder="youremail@test.com"
+        <div className="form-control">
+          <label htmlFor="email" className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input 
+            placeholder="email"
             name="email"
             type="email"
             value={formState.email}
             onChange={handleChange}
-          />
+            className="input input-bordered" />
         </div>
-        <div className="">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
+
+        <div className="form-control">
+          <label htmlFor="pwd" className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <input 
+            placeholder="password"
             name="password"
             type="password"
             value={formState.password}
-            onChange={handleChange}
-          />
+            onChange={handleChange} 
+            className="input input-bordered" />
+          
+        <Link to="/login" className="pt-5">← Go to Login</Link>
         </div>
-        <div className="">
-          <button type="submit">Submit</button>
+
+        <div className="form-control mt-6">
+          <button className="btn btn-primary">Sign Up</button>
         </div>
-      </form>
+      </div>
     </div>
+    </form>
+  </div>
+</div>
+
   );
 };
 
