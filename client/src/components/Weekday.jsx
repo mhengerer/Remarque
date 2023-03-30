@@ -1,4 +1,5 @@
 import React from "react";
+import TextareaAutosize from "react-textarea-autosize";
 
 // date function
 
@@ -8,10 +9,11 @@ const Weekday = () => {
       <label className="label">
         <span className=" text-white label-text">Monday 03/25</span>
       </label>
-      <textarea
+      <TextareaAutosize
         type="text"
+        minRows="3"
         placeholder="Type here"
-        className="flex textarea textarea-bordered textarea-lg w-full"
+        className="flex textarea textarea-bordered w-full resize-none"
       />
     </div>
   );
