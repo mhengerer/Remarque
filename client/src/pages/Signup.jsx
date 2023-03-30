@@ -39,7 +39,7 @@ const Signup = () => {
     <div className="hero min-h-screen bg-base-200">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
-      <Modal/>
+      <SplashScreen/>
       <h1 className="text-5xl font-bold">Sign Up!</h1>
       <p className="py-6">Create an account to make your digital bullet dreams come to life!</p>
     </div>
