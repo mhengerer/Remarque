@@ -30,41 +30,58 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
 
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremail@test.com"
+<div className="hero min-h-screen bg-base-200">
+  <div className="hero-content flex-col lg:flex-row-reverse">
+    <div className="text-center lg:text-left">
+      <h1 className="text-5xl font-bold">Hello Bullet Planner,<br></br> Please Log In!</h1>
+    </div>
+
+  <form onSubmit={handleFormSubmit}>
+    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div className="card-body">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input 
+            placeholder="email"
             name="email"
             type="email"
             id="email"
-            onChange={handleChange}
-          />
+            onChange={handleChange} 
+            className="input input-bordered" />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
+
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <input 
+            placeholder="password"
             name="password"
             type="password"
             id="pwd"
             onChange={handleChange}
-          />
+            className="input input-bordered" />
         </div>
-        {error ? (
+          {error ? (
           <div>
             <p className="error-text">The provided credentials are incorrect</p>
           </div>
         ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+        <div className="container my-1"></div>
+      <Link to="/signup">← Go to Signup</Link>
+
+        <div className="form-control mt-6">
+          <button className="btn btn-primary">Login</button>
         </div>
-      </form>
+      </div>
     </div>
+    </form>
+  </div>
+</div>
+
   );
 }
 
