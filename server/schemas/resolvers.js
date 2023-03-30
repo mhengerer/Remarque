@@ -1,7 +1,11 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Spread, GridItem, PlannerItem } = require("../models");
 const { signToken } = require("../utils/auth");
-const { getPreviousMonday, getNextSunday } = require("../utils/weekCalc");
+const {
+  getPreviousMonday,
+  getNextSunday,
+  sevenDay,
+} = require("../utils/weekCalc");
 
 const resolvers = {
   Query: {
@@ -34,10 +38,12 @@ const resolvers = {
     // -Referenced date for making the new spread
     // -Planner items that the user has saved
     // -Location of the grid items on the page
-    addSpread: async (parent, { date, plannerItems, gridItems }, context) => {
+    addSpread: async (parent, { date, gridItems }, context) => {
       if (context.user) {
         const monday = getPreviousMonday(date);
         const sunday = getNextSunday(date);
+        const week = sevenDay(monday);
+        console.log(week);
         const spread = await Spread.create({
           monday,
           sunday,
@@ -55,7 +61,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addPlannerItem: async (parent, {spreadId, body}, context) => {
+    addPlannerItem: async (parent, { spreadId, body }, context) => {
       if (context.user) {
         // Set items in exact order of model
         const plannerItem = await PlannerItem.create({ body });
@@ -64,10 +70,11 @@ const resolvers = {
           $push: { plannerItems: plannerItem },
         });
 
-        return plannerItem
+        return plannerItem;
       }
-    }, 
+    },
     // QCed
+
     addGridItem: async (
       parent,
       { title, body, x, y, h, w, i, spreadId },
@@ -132,13 +139,13 @@ const resolvers = {
   },
 };
 
-    // TODO: Write this
-  //   updateSpread: async (parent, {plannerItems, _id}, context) => {
-  //     if (context.user) {
-  //       return await Spread.findByIdAndUpdate(_id, {planner : {}}, {
-  //         new: true,
-  //       });
-  //   }
-  // },
+// TODO: Write this
+//   updateSpread: async (parent, {plannerItems, _id}, context) => {
+//     if (context.user) {
+//       return await Spread.findByIdAndUpdate(_id, {planner : {}}, {
+//         new: true,
+//       });
+//   }
+// },
 
 module.exports = resolvers;
