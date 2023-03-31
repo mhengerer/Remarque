@@ -1,9 +1,11 @@
 import React from "react";
 import Weekday from "../Weekday";
+import Dragger from "./Dragger";
 
 const Planner = () => {
   return (
     <div className="w-full text-white grid grid-cols-1 grid-flow-row text-left">
+      <Dragger />
       <Weekday />
       <Weekday />
       <Weekday />
