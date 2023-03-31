@@ -36,17 +36,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen bg-gradient-to-r from-secondary to-primary">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
+      <h1 className="text-5xl font-bold">Remarque</h1>
+      <h2 className="text-3xl mt-1 mb-5">simply put - a bullet journal application</h2>
+      
       <SplashScreen/>
-      <h1 className="text-5xl font-bold">Sign Up!</h1>
-      <p className="py-6">Create an account to make your digital bullet dreams come to life!</p>
     </div>
     <form onSubmit={handleFormSubmit}>
     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
       <div className="card-body">
-        
+        <h1 className="text-3xl font-bold">Sign Up Here!</h1>
         <div className="form-control">
           <label htmlFor="username" className="label">
             <span className="label-text">Username</span>
