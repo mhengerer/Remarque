@@ -26,14 +26,23 @@ const resolvers = {
       return users;
     },
     spread: async (parent, { date }, context) => {
-      const monday = new Date(date);
-      const mondayString = monday.toISOString().substring(0, 10);
+      if (context.user) {
+        const day = new Date(date);
+        const monday = getPreviousMonday(day).toISOString().substring(0, 10);
+        console.log(monday);
+        const spread = await Spread.findOne()
+          .where("monday")
+          .equals(monday)
+          .where("userId")
+          .equals(context.user._id);
 
-      const user = await User.findById(context.user._id).aggregate([
-        {
-          $match: { date: monday },
-        },
-      ]);
+        return spread;
+      }
+    },
+    userSpreads: async (parent, args, context) => {
+      if (context.user) {
+        return await Spread.find().where("userId").equals(context.user._id);
+      }
     },
   },
   Mutation: {
@@ -57,6 +66,7 @@ const resolvers = {
         const week = sevenDay(monday);
         const plannerItems = await createPlanner(week);
         const gridItems = await createGridTemplate();
+        const userId = context.user._id;
 
         monday = monday.toISOString().substring(0, 10);
         sunday = sunday.toISOString().substring(0, 10);
@@ -65,6 +75,7 @@ const resolvers = {
           sunday,
           plannerItems,
           gridItems,
+          userId,
         });
 
         await User.findByIdAndUpdate(context.user._id, {

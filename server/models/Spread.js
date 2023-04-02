@@ -28,6 +28,11 @@ const spreadSchema = new Schema({
       required: true,
     },
   ],
+  userId: {
+    type: Schema.Types.ObjectId, 
+    ref: "User", 
+    required: true 
+  }
 });
 
 const Spread = model("Spread", spreadSchema);

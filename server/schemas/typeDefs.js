@@ -24,6 +24,7 @@ const typeDefs = gql`
     sunday: String!
     plannerItems: [PlannerItem]!
     gridItems: [GridItem]!
+    userId: ID!
   }
 
   type User {
@@ -42,7 +43,8 @@ const typeDefs = gql`
   type Query {
     user: User
     allUsers: [User]
-    spread: [Spread]
+    spread(date: String!): Spread
+    userSpreads: [Spread]
   }
 
   type Mutation {
