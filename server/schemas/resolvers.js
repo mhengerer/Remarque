@@ -65,7 +65,8 @@ const resolvers = {
         let sunday = getNextSunday(date);
         const week = sevenDay(monday);
         const plannerItems = await createPlanner(week);
-        const gridItems = await createGridTemplate();
+        const { gridItems, layoutItems } = await createGridTemplate();
+        let layout = layoutItems; 
         const userId = context.user._id;
 
         monday = monday.toISOString().substring(0, 10);
@@ -75,6 +76,7 @@ const resolvers = {
           sunday,
           plannerItems,
           gridItems,
+          layout,
           userId,
         });
 

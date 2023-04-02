@@ -1,4 +1,4 @@
-const { PlannerItem, GridItem } = require("../models");
+const { PlannerItem, GridItem, Layout } = require("../models");
 
 module.exports = {
   getPreviousMonday: (dateString) => {
@@ -42,7 +42,7 @@ module.exports = {
     return plannerItems;
   },
   createGridTemplate: async () => {
-    const layout = [
+    const template = [
       {
         i: "0",
         x: 0,
@@ -56,29 +56,38 @@ module.exports = {
       },
       { i: "1", x: 3, y: 0, w: 1, h: 3, minH: 3, maxH: 3, card: "card" },
       { i: "2", x: 4, y: 0, w: 1, h: 3, minH: 3, maxH: 3, card: "card" },
-      { i: "4", x: 2, y: 0, w: 3, h: 3, card: "todo" },
+      { i: "4", x: 2, y: 0, w: 3, h: 3, minH: 3, maxH: 3, card: "todo" },
       { i: "5", x: 2, y: 0, w: 1, h: 3, minH: 3, maxH: 3, card: "card" },
     ];
 
     let gridItems = [];
+    let layoutItems = [];
 
-    for (let i = 0; i < layout.length; i++) {
-      const card = layout[i];
+    for (let i = 0; i < template.length; i++) {
+      const layout = template[i];
       const gridObj = await GridItem.create({
         title: "Note",
         body: "",
-        i: card.i,
-        x: card.x,
-        y: card.y,
-        w: card.w,
-        h: card.h,
-        minH: card.minH,
-        maxH: card.mahX,
-        card: card.card,
+        i: layout.i,
+        card: layout.card,
       });
       gridItems.push(gridObj);
+
+      const layoutObj = await Layout.create({
+        i: layout.i,
+        x: layout.x,
+        y: layout.y,
+        w: layout.w,
+        h: layout.h,
+        minW: layout.minW,
+        maxW: layout.maxW,
+        minH: layout.minH,
+        maxH: layout.maxH,
+      });
+
+      layoutItems.push(layoutObj);
     }
 
-    return gridItems;
+    return { gridItems, layoutItems };
   },
 };

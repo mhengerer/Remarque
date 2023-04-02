@@ -5,11 +5,8 @@ const typeDefs = gql`
     _id: ID
     title: String
     body: [String]!
+    card: String!
     i: Int
-    x: Int
-    y: Int
-    w: Int
-    h: Int
   }
 
   type PlannerItem {
@@ -18,12 +15,26 @@ const typeDefs = gql`
     dayOfCurrentMonth: Int!
   }
 
+  type Layout {
+    _id: ID
+    i: String
+    x: Int
+    y: Int
+    w: Int
+    h: Int
+    minW: Int
+    maxW: Int
+    minH: Int
+    maxH: Int
+  }
+
   type Spread {
     _id: ID
     monday: String!
     sunday: String!
     plannerItems: [PlannerItem]!
     gridItems: [GridItem]!
+    layout: [Layout]
     userId: ID!
   }
 
