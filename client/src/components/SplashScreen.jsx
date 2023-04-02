@@ -5,31 +5,33 @@ const SplashScreen = () => {
     <div>
       {/* The button to open modal */}
       <label htmlFor="my-modal" className="btn">
-        open modal
+        learn more
       </label>
 
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box h-5/6 w-11/12 max-w-5xl hero min-h-fit bg-gradient-to-r from-secondary to-primary">
-          <div className="hero-content flex-col lg:flex-row">
-            <div>
-              <h1 className="text-5xl font-bold">
-                Remarque - A Bullet Journal Application
-              </h1>
-              <p className="py-6">
-                The perfect digital tool for everyday planning.
-              </p>
-              <div className="modal-action"></div>
-              <div className="flex justify-center space-x-10">
-                <label htmlFor="my-modal" className="btn btn-primary">
-                  Get Started
-                </label>
-                <div className="modal-action"></div>
-                <label htmlFor="demo" className="btn btn-secondary">
-                  Learn More
-                </label>
-              </div>
-            </div>
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Welcome to Remarque!</h3>
+          <p className="py-2">a digital format for bullet journaling.</p>
+          <p className="font-bold text-sm">
+            we ask that new users follow these steps:
+          </p>
+          <div>
+            <ul className="steps steps-vertical">
+              <li className="step step-primary">Create an account</li>
+              <li className="step step-primary">Be sure to log in</li>
+              <li className="step step-primary">
+                Find the ⓘ to Learn How To Customize your Journal
+              </li>
+              <li className="step step-primary">
+                Begin your Digital Bullet Journal Dreams{" "}
+              </li>
+            </ul>
+          </div>
+          <div className="modal-action">
+            <label htmlFor="my-modal" className="btn">
+              Yay!
+            </label>
           </div>
         </div>
       </div>

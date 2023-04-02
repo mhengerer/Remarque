@@ -5,6 +5,8 @@ const {
   getPreviousMonday,
   getNextSunday,
   sevenDay,
+  createPlanner,
+  createGridTemplate,
 } = require("../utils/weekCalc");
 
 const resolvers = {
@@ -23,6 +25,25 @@ const resolvers = {
 
       return users;
     },
+    spread: async (parent, { date }, context) => {
+      if (context.user) {
+        const day = new Date(date);
+        const monday = getPreviousMonday(day).toISOString().substring(0, 10);
+        console.log(monday);
+        const spread = await Spread.findOne()
+          .where("monday")
+          .equals(monday)
+          .where("userId")
+          .equals(context.user._id);
+
+        return spread;
+      }
+    },
+    userSpreads: async (parent, args, context) => {
+      if (context.user) {
+        return await Spread.find().where("userId").equals(context.user._id);
+      }
+    },
   },
   Mutation: {
     // Create new user
@@ -38,17 +59,23 @@ const resolvers = {
     // -Referenced date for making the new spread
     // -Planner items that the user has saved
     // -Location of the grid items on the page
-    addSpread: async (parent, { date, gridItems }, context) => {
+    addSpread: async (parent, { date }, context) => {
       if (context.user) {
-        const monday = getPreviousMonday(date);
-        const sunday = getNextSunday(date);
+        let monday = getPreviousMonday(date);
+        let sunday = getNextSunday(date);
         const week = sevenDay(monday);
-        console.log(week);
+        const plannerItems = await createPlanner(week);
+        const gridItems = await createGridTemplate();
+        const userId = context.user._id;
+
+        monday = monday.toISOString().substring(0, 10);
+        sunday = sunday.toISOString().substring(0, 10);
         const spread = await Spread.create({
           monday,
           sunday,
           plannerItems,
           gridItems,
+          userId,
         });
 
         await User.findByIdAndUpdate(context.user._id, {

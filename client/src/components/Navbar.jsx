@@ -1,4 +1,5 @@
 import React from "react";
+import Auth from "../utils/auth"
 
 const Navbar = () => {
   return (
@@ -56,7 +57,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn flex-initial max-w-28 ml-5">Log out</a>
+        <a className="btn flex-initial max-w-28 ml-5" href="/login" onClick={() => Auth.logout()}>Log out</a>
       </div>
     </div>
   );
