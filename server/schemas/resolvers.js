@@ -29,7 +29,6 @@ const resolvers = {
       if (context.user) {
         const day = new Date(date);
         const monday = getPreviousMonday(day).toISOString().substring(0, 10);
-        console.log(monday);
         const spread = await Spread.findOne()
           .where("monday")
           .equals(monday)
@@ -37,6 +36,14 @@ const resolvers = {
           .equals(context.user._id);
 
         return spread;
+      }
+    },
+    spreadById: async (parent, { _id }, context) => {
+      if (context.user) {
+        return await Spread.findById(_id)
+          .populate("gridItems")
+          .populate("plannerItems")
+          .populate("layout");
       }
     },
     userSpreads: async (parent, args, context) => {
@@ -66,7 +73,7 @@ const resolvers = {
         const week = sevenDay(monday);
         const plannerItems = await createPlanner(week);
         const { gridItems, layoutItems } = await createGridTemplate();
-        let layout = layoutItems; 
+        let layout = layoutItems;
         const userId = context.user._id;
 
         monday = monday.toISOString().substring(0, 10);
