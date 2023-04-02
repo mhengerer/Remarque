@@ -42,6 +42,7 @@ const typeDefs = gql`
   type Query {
     user: User
     allUsers: [User]
+    spread: [Spread]
   }
 
   type Mutation {
