@@ -1,30 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import Auth from "../utils/auth";
 
 const Navbar = () => {
-  // const [spread, setSpread] = useState(currentSpread);
+  const [spread, setSpread] = useState(currentSpread);
   const spreadArray = [0,1,2,3,4,5,6,7,8];
-  // const currentSpread = spreadArray[4];
+  const currentSpread = spreadArray[4];
 
   const navPrev = (e) => {
     e.preventDefault();
     console.log("boof");
 
-    // setSpread(spreadArray[i-1]);
+    setSpread(spreadArray[i-1]);
   };
 
   const navNow = (e) => {
     e.preventDefault;
     console.log("beef");
 
-    // setSpread(currentSpread)
+    setSpread(currentSpread)
   };
 
   const navNext = (e) => {
     e.preventDefault();
     console.log("biff");
 
-    // setSpread(spreadArray[i+1]);
+    setSpread(spreadArray[i+1]);
   };
 
   const navHere = (e) => {
@@ -32,7 +32,7 @@ const Navbar = () => {
     console.log("borf");
     console.log(e.target.value);
 
-    // setSpread(spreadArray[i])
+    setSpread(spreadArray[i])
   };
 
   return (
