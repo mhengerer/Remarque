@@ -1,40 +1,40 @@
-import React, {useState} from "react";
+import React from "react";
 import Auth from "../utils/auth";
 
+const Navbar = ({ allSpreads }) => {
+  console.log(allSpreads);
+//   const [spread, setSpread] = useState(currentSpread);
+//   const spreadArray = [0,1,2,3,4,5,6,7,8];
+//   const currentSpread = spreadArray[4];
 
-const Navbar = () => {
-  const [spread, setSpread] = useState(currentSpread);
-  const spreadArray = [0,1,2,3,4,5,6,7,8];
-  const currentSpread = spreadArray[4];
+//   const navPrev = (e) => {
+//     e.preventDefault();
+//     console.log("boof");
 
-  const navPrev = (e) => {
-    e.preventDefault();
-    console.log("boof");
+// //     setSpread(spreadArray[i-1]);
+//    };
 
-    setSpread(spreadArray[i-1]);
-  };
+//   const navNow = (e) => {
+//     e.preventDefault;
+//     console.log("beef");
 
-  const navNow = (e) => {
-    e.preventDefault;
-    console.log("beef");
+// //     setSpread(currentSpread)
+//   };
 
-    setSpread(currentSpread)
-  };
+//   const navNext = (e) => {
+//     e.preventDefault();
+//     console.log("biff");
 
-  const navNext = (e) => {
-    e.preventDefault();
-    console.log("biff");
+// //     setSpread(spreadArray[i+1]);
+//   };
 
-    setSpread(spreadArray[i+1]);
-  };
+//   const navHere = (e) => {
+//     e.preventDefault();
+//     console.log("borf");
+//     console.log(e.target.value);
 
-  const navHere = (e) => {
-    e.preventDefault();
-    console.log("borf");
-    console.log(e.target.value);
-
-    setSpread(spreadArray[i])
-  };
+//     setSpread(spreadArray[i])
+  //  };
 
   return (
     <div className="navbar bg-base-100">
@@ -62,13 +62,13 @@ const Navbar = () => {
           >
             <li>Table of Contents</li>
             <li>
-              {spreadArray.map((spread) => {
-                return (
-                  <button value={spread} onClick={navHere}>
-                    <a>{spread}</a>
+              {/* {spreadArray.map((spread) => {
+                return ( */}
+                  <button>
+                    <a>uuuh</a>
                   </button>
-                );
-              })}
+                {/* );
+              })} */}
             </li>
           </ul>
         </div>
@@ -79,7 +79,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-center lg:flex">
         <ul className="menu menu-horizontal">
-          <button className="btn btn-square" onClick={navPrev}>
+          <button className="btn btn-square">
             <svg
               aria-hidden="true"
               className="w-5 h-5 rotate-180"
@@ -95,11 +95,11 @@ const Navbar = () => {
             </svg>
           </button>
           <li tabIndex={0}>
-            <button className="btn btn-accent mx-3" onClick={navNow}>
+            <button className="btn btn-accent mx-3">
               <h2 className="font-bold">This Week</h2>
             </button>
           </li>
-          <button className="btn btn-square" onClick={navNext}>
+          <button className="btn btn-square">
             <svg
               aria-hidden="true"
               className="w-5 h-5"

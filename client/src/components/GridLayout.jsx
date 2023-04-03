@@ -20,7 +20,10 @@ const styles = {
 //   this.props.onLayoutChange(layout); // updates status display
 // };
 
-const Layout = (props) => {
+const Layout = ({ currentSpread }) => {
+  const spread = currentSpread;
+  console.log(`Current Spread`);
+  console.log(spread);
   const [items, setItems] = React.useState([
     {
       i: "0",
@@ -68,7 +71,8 @@ const Layout = (props) => {
   );
 };
 
-const GridLayout = () => {
-  return <Layout />;
+const GridLayout = ({ currentSpread }) => {
+  console.log(currentSpread);
+  return <Layout currentSpread={{ currentSpread }} />;
 };
 export default GridLayout;
