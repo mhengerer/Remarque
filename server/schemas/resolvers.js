@@ -13,8 +13,12 @@ const resolvers = {
   Query: {
     // QCed
     user: async (parent, args, context) => {
-      const user = await User.findById(context.user._id).populate("spreads");
-
+      const user = await User.findById(context.user._id)
+        .populate({
+          path: "spreads",
+          populate: "gridItems spreadItems layout",
+        })
+        .sort({ monday: -1 });
       return user;
 
       //throw new AuthenticationError("Not logged in");

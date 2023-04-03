@@ -44,3 +44,29 @@ export const QUERY_SPREAD = gql`
     }
   }
 `;
+
+export const QUERY_DATE = gql`
+  query UserSpreads($date: String!) {
+    spread(date: $date) {
+      _id
+      gridItems {
+        _id
+      }
+      monday
+      sunday
+      userId
+      layout {
+        _id
+        x
+        y
+        w
+        h
+        i
+        maxH
+        maxW
+        minH
+        minW
+      }
+    }
+  }
+`;

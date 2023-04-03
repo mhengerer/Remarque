@@ -4,11 +4,19 @@ import React, { useState } from "react";
 import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
 import Auth from "../utils/auth";
-import { QUERY_SPREAD } from "../utils/queries";
+import { QUERY_DATE, QUERY_SPREAD, QUERY_USER } from "../utils/queries";
 
-const Journal = async (props) => {
-  // Set the current spread in the state for use by Components
-  const [spread, setSpread] = useState("");
+const Journal = (props) => {
+  // Generates the user ID and a list of all their spreads
+  const useUserData = async () => {
+    const { loading, error, data } = await useQuery(QUERY_USER);
+    return data;
+  };
+  const useCurrentDate = async () => {
+    const { loading, error, data } = await useQuery(QUERY_DATE);
+    return data;
+  };
+  const allSpreads = useUserData();
   // Get spreadId from params (needs to be set)
   const { spreadId } = useParams();
   // Query for spread data from id
@@ -24,15 +32,10 @@ const Journal = async (props) => {
   checkLoggedIn();
 
   return (
-    <div
-      className="grid grid-flow-row"
-      loading={loading}
-      error={error}
-      data={data}
-    >
+    <div className="grid grid-flow-row">
       <Navbar />
       <div className="w-full text-left">
-        <GridLayout data={data} />
+        <GridLayout />
       </div>
 
       <div className="sticky bottom-0 left-70 h-20 w-20">

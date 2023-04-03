@@ -18,7 +18,7 @@ const Weekday = (props) => {
     }
   };
 
-  console.log(JSON.stringify(props));
+  //console.log(JSON.stringify(props));
 
   const handleChange = (e) => {
     const { value } = e.target;
