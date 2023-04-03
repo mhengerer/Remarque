@@ -16,7 +16,7 @@ const Journal = (props) => {
     const { loading, error, data } = await useQuery(QUERY_DATE);
     return data;
   };
-  const allSpreads = useUserData();
+  const allSpreads = useUserData().then((data) => console.log(data));
   // Get spreadId from params (needs to be set)
   const { spreadId } = useParams();
   // Query for spread data from id

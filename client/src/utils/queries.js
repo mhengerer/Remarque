@@ -7,7 +7,33 @@ export const QUERY_USER = gql`
       spreads {
         _id
         monday
+        sunday
+        plannerItems {
+          _id
+          body
+          dayOfCurrentWeek
+        }
+        gridItems {
+          _id
+          title
+          body
+          i
+        }
+        layout {
+          _id
+          i
+          x
+          y
+          w
+          h
+          minW
+          maxW
+          minH
+          maxH
+        }
+        userId
       }
+      username
     }
   }
 `;
