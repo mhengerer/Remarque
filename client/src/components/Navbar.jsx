@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Auth from "../utils/auth";
 
+
 const Navbar = () => {
   const [spread, setSpread] = useState(currentSpread);
   const spreadArray = [0,1,2,3,4,5,6,7,8];
