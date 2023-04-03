@@ -32,6 +32,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// TODO: Add a function to automatically either:
+// TODO: Route to this week's spread, or make one if there isn't one 
+
 const App = () => {
   return (
     <ApolloProvider client={client}>
@@ -40,6 +43,7 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            {/* TODO: Update this route to be /spreads/_id */}
             <Route path="/" element={<Journal />} />
           </Routes>
         </div>
