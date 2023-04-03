@@ -2,22 +2,23 @@ const { Schema, model } = require("mongoose");
 
 const PlannerItem = require("./PlannerItem");
 const GridItem = require("./GridItem");
+const Layout = require("./Layout");
 
 const spreadSchema = new Schema({
   monday: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   sunday: {
     type: String,
-    required: true
+    required: true,
   },
   plannerItems: [
     {
       type: Schema.Types.ObjectId,
       ref: "PlannerItem",
-      required: true
+      required: true,
     },
   ],
   // Do an include when you want to pull the griditems as well
@@ -28,11 +29,18 @@ const spreadSchema = new Schema({
       required: true,
     },
   ],
+  layout: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Layout",
+      required: true,
+    },
+  ],
   userId: {
-    type: Schema.Types.ObjectId, 
-    ref: "User", 
-    required: true 
-  }
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const Spread = model("Spread", spreadSchema);

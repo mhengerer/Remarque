@@ -13,7 +13,7 @@ const resolvers = {
   Query: {
     // QCed
     user: async (parent, args, context) => {
-      const user = await User.findById(context.user._id);
+      const user = await User.findById(context.user._id).populate("spreads");
 
       return user;
 
@@ -29,7 +29,6 @@ const resolvers = {
       if (context.user) {
         const day = new Date(date);
         const monday = getPreviousMonday(day).toISOString().substring(0, 10);
-        console.log(monday);
         const spread = await Spread.findOne()
           .where("monday")
           .equals(monday)
@@ -37,6 +36,14 @@ const resolvers = {
           .equals(context.user._id);
 
         return spread;
+      }
+    },
+    spreadById: async (parent, { _id }, context) => {
+      if (context.user) {
+        return await Spread.findById(_id)
+          .populate("gridItems")
+          .populate("plannerItems")
+          .populate("layout");
       }
     },
     userSpreads: async (parent, args, context) => {
@@ -65,7 +72,8 @@ const resolvers = {
         let sunday = getNextSunday(date);
         const week = sevenDay(monday);
         const plannerItems = await createPlanner(week);
-        const gridItems = await createGridTemplate();
+        const { gridItems, layoutItems } = await createGridTemplate();
+        let layout = layoutItems;
         const userId = context.user._id;
 
         monday = monday.toISOString().substring(0, 10);
@@ -75,6 +83,7 @@ const resolvers = {
           sunday,
           plannerItems,
           gridItems,
+          layout,
           userId,
         });
 
@@ -120,10 +129,9 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    // TODO: Unbreak this
-    updateGridItem: async (parent, args, context) => {
+    updateGridItem: async (parent, { _id }, context) => {
       if (context.user) {
-        return await GridItem.findByIdAndUpdate(context.grid_item._id, args, {
+        return await GridItem.findByIdAndUpdate(_id, {
           new: true,
         });
       }
