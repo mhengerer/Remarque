@@ -25,23 +25,23 @@ const InfoModal = () => {
 
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Congratualtions!</h3>
-          <p className="py-2">This is the start to an organized future!</p>
-          <p className="font-bold text-m">How to customize your journal:</p>
-          <div>
-            <p className="font-bold text-sm">
+        <div className="modal-box bg-white">
+          <h3 className="font-bold text-xl">Congratulations!</h3>
+          <p className="py-2">I see organization in your future🔮</p>
+          <p className="font-bold text-m">This is how you can customize your journal:</p>
+          <div className="text-primary">
+            <p className="font-bold text-lg m-5">
               Move the provided boxes to your liking.
               <img src={animation1} alt="Gif Demonstrating Dragability" />
             </p>
-            <p className="font-bold text-sm">
-              Add texts to your text boxes.
-              <img src={animation2} alt="Gif Demonstrating Adding Text" />
+            <p className="font-bold text-lg m-5">
+              Add text to text areas.
+              <img src={animation3} alt="Gif Demonstrating Adding Text" />
             </p>
 
-            <p className="font-bold text-sm">
+            <p className="font-bold text-lg m-5">
               Resize the boxes to your liking.
-              <img src={animation3} alt="Gif Demonstrating Resizing Cards" />
+              <img src={animation2} alt="Gif Demonstrating Resizing Cards" />
             </p>
           </div>
           <div className="modal-action">
