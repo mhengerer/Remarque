@@ -18,10 +18,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    spread: [{
-        type : Schema.Types.ObjectId, 
-        ref : 'spread'
-    }],
+    spreads: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Spread",
+      },
+    ],
   },
   // set this to use virtual below
   {

@@ -35,7 +35,7 @@ module.exports = {
     let plannerItems = [];
 
     for (day in week) {
-      const plannerItem = await PlannerItem.create({ dayOfCurrentMonth: day });
+      const plannerItem = await PlannerItem.create({ dayOfCurrentWeek: day });
       plannerItems.push(plannerItem);
     }
 

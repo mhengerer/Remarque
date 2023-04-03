@@ -72,16 +72,7 @@ const typeDefs = gql`
       h: Int
       spreadId: ID!
     ): GridItem
-    updateGridItem(
-      _id: ID!
-      title: String!
-      body: [String]!
-      i: Int!
-      x: Int!
-      y: Int!
-      w: Int!
-      h: Int!
-    ): GridItem
+    updateGridItem(_id: ID!, title: String, body: [String], i: Int): GridItem
     addPlannerItem(spreadId: ID!, body: String): PlannerItem
     updateUser(username: String, email: String, password: String): User
     login(email: String!, password: String!): Auth

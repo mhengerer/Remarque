@@ -13,7 +13,7 @@ const resolvers = {
   Query: {
     // QCed
     user: async (parent, args, context) => {
-      const user = await User.findById(context.user._id);
+      const user = await User.findById(context.user._id).populate("spreads");
 
       return user;
 
@@ -129,10 +129,9 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    // TODO: Unbreak this
-    updateGridItem: async (parent, args, context) => {
+    updateGridItem: async (parent, { _id }, context) => {
       if (context.user) {
-        return await GridItem.findByIdAndUpdate(context.grid_item._id, args, {
+        return await GridItem.findByIdAndUpdate(_id, {
           new: true,
         });
       }
