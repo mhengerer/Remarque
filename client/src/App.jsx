@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -12,8 +12,6 @@ import "./beep.css";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Journal from "./pages/Journal";
-
-import Auth from "./utils/auth";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -35,7 +33,6 @@ const client = new ApolloClient({
 });
 
 const App = () => {
- 
   return (
     <ApolloProvider client={client}>
       <Router>

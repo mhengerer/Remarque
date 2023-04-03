@@ -13,12 +13,12 @@ const styles = {
   },
 };
 
-const onLayoutChange = (layout) => {
-  /*eslint no-console: 0*/
-  saveToLS("layout", layout);
-  this.setState({ layout });
-  this.props.onLayoutChange(layout); // updates status display
-};
+// const onLayoutChange = (layout) => {
+//   /*eslint no-console: 0*/
+//   // saveToLS("layout", layout);
+//   this.setState({ layout });
+//   this.props.onLayoutChange(layout); // updates status display
+// };
 
 const Layout = (props) => {
   const [items, setItems] = React.useState([
@@ -50,7 +50,7 @@ const Layout = (props) => {
       width={1000}
       margin={[0, 0]}
       resizeHandles={["se"]}
-      onLayoutChange={saveLayout()}
+      // onLayoutChange={saveLayout()}
     >
       {items.map((item) => {
         return (

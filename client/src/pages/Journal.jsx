@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
 import Auth from "../utils/auth";
