@@ -1,8 +1,15 @@
-import react from "react";
+import React, { useState } from "react";
 import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
+import Auth from "../utils/auth";
 
 const Journal = () => {
+  const checkLoggedIn = () => {
+    if (!Auth.loggedIn()) {
+      window.location.replace("/login");
+    }
+  };
+  checkLoggedIn();
   return (
     <div className="grid grid-flow-row">
       <Navbar />
