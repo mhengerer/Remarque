@@ -37,7 +37,7 @@ const Navbar = ({ allSpreads }) => {
   //  };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-gradient-to-r from-primary to-secondary">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -72,14 +72,13 @@ const Navbar = ({ allSpreads }) => {
             </li>
           </ul>
         </div>
-
         <button className="btn btn-ghost normal-case hidden lg:flex text-xl">
           Remarque
         </button>
       </div>
       <div className="navbar-center lg:flex">
         <ul className="menu menu-horizontal">
-          <button className="btn btn-square">
+          <button className="btn btn-ghost">
             <svg
               aria-hidden="true"
               className="w-5 h-5 rotate-180"
@@ -99,7 +98,7 @@ const Navbar = ({ allSpreads }) => {
               <h2 className="font-bold">This Week</h2>
             </button>
           </li>
-          <button className="btn btn-square">
+          <button className="btn btn-ghost">
             <svg
               aria-hidden="true"
               className="w-5 h-5"
@@ -118,7 +117,7 @@ const Navbar = ({ allSpreads }) => {
       </div>
       <div className="navbar-end">
         <a
-          className="btn flex-initial max-w-28 ml-5"
+          className="btn btn-ghost flex-initial max-w-28 ml-5"
           href="/login"
           onClick={() => Auth.logout()}
         >
