@@ -13,8 +13,22 @@ const resolvers = {
   Query: {
     // QCed
     user: async (parent, args, context) => {
-      const user = await User.findById(context.user._id).populate("spreads");
-
+      const user = await User.findById(context.user._id)
+        .populate([
+          {
+            path: "spreads",
+            populate: "gridItems ",
+          },
+          {
+            path: "spreads",
+            populate: "plannerItems ",
+          },
+          {
+            path: "spreads",
+            populate: "layout",
+          },
+        ])
+        .sort({ monday: -1 });
       return user;
 
       //throw new AuthenticationError("Not logged in");
@@ -129,17 +143,24 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    updateGridItem: async (parent, { _id }, context) => {
+    updateGridItem: async (parent, args, context) => {
       if (context.user) {
-        return await GridItem.findByIdAndUpdate(_id, {
+        return await GridItem.findByIdAndUpdate(args._id, args, {
           new: true,
         });
       }
 
       throw new AuthenticationError("Not logged in");
     },
-    // Update user profile
-    // TODO: Take a second look at this method
+    updatePlannerItem: async (parent, args, context) => {
+      if (context.user) {
+        return await PlannerItem.findByIdAndUpdate(args._id, args, {
+          new: true,
+        });
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -166,21 +187,7 @@ const resolvers = {
 
       return { token, user };
     },
-    // addGridItem: async (parent, { title, body, i, x, y, w, h }, context) => {
-    //   const GridItem = await GridItem.create(args);
-
-    //   return GridItem;
-    // },
   },
 };
-
-// TODO: Write this
-//   updateSpread: async (parent, {plannerItems, _id}, context) => {
-//     if (context.user) {
-//       return await Spread.findByIdAndUpdate(_id, {planner : {}}, {
-//         new: true,
-//       });
-//   }
-// },
 
 module.exports = resolvers;
