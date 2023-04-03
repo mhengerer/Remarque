@@ -7,10 +7,12 @@ const Todo = () => {
       <div className="overflow-x-auto overflow-y-auto max-w-full max-h-full">
         <table className="table w-full">
           {/* head */}
+
           <thead>
-          <Dragger />
             <tr>
-              <th></th>
+              <th>
+                <Dragger />
+              </th>
               <th>Task</th>
               <th>Importance</th>
               <th>Complete</th>
