@@ -1,7 +1,8 @@
 import React from "react";
 import Auth from "../utils/auth";
 
-const Navbar = () => {
+const Navbar = ({ allSpreads }) => {
+  console.log(allSpreads);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">

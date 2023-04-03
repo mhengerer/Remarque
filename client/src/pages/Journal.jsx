@@ -21,7 +21,7 @@ const Journal = (props) => {
     setAllSpreads(user.spreads);
     console.log(allSpreads);
     setCurrentSpread(user.spreads.slice(-1)[0]);
-    console.logs(currentSpread);
+    console.log(currentSpread);
   });
   // Get spreadId from params (needs to be set)
   const { spreadId } = useParams();

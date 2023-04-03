@@ -71,7 +71,8 @@ const Layout = ({ currentSpread }) => {
   );
 };
 
-const GridLayout = () => {
-  return <Layout />;
+const GridLayout = ({ currentSpread }) => {
+  console.log(currentSpread);
+  return <Layout currentSpread={{ currentSpread }} />;
 };
 export default GridLayout;
