@@ -7,7 +7,7 @@ module.exports = {
 
     return today === input;
   },
-  getTodaysDate: (date) => {
+  getTodaysDate: () => {
     return new Date().toISOString.substring(0, 10);
   },
 };

@@ -14,10 +14,20 @@ const resolvers = {
     // QCed
     user: async (parent, args, context) => {
       const user = await User.findById(context.user._id)
-        .populate({
-          path: "spreads",
-          populate: "gridItems spreadItems layout",
-        })
+        .populate([
+          {
+            path: "spreads",
+            populate: "gridItems ",
+          },
+          {
+            path: "spreads",
+            populate: "plannerItems ",
+          },
+          {
+            path: "spreads",
+            populate: "layout",
+          },
+        ])
         .sort({ monday: -1 });
       return user;
 
