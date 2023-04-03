@@ -5,9 +5,8 @@ const plannerItemSchema = new Schema({
   body: {
     type: String,
   },
-  dayOfCurrentMonth: {
+  dayOfCurrentWeek: {
     type: Number,
-    require: true
   },
 });
 

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -20,4 +20,21 @@ export const ADD_USER = gql`
       }
     }
   }
-  `;
+`;
+
+export const ADD_SPREAD = gql`
+  mutation addSpread($date: String!) {
+    addSpread(date: $date) {
+      _id
+      monday
+    }
+  }
+`;
+
+export const UPDATE_GRIDITEM = gql`
+  mutation UpdateGridItem($id: ID!, $title: String, $body: [String]) {
+    updateGridItem(_id: $id, title: $title, body: $body) {
+      _id
+    }
+  }
+`;
