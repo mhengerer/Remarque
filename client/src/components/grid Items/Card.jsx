@@ -84,8 +84,8 @@ const Card = ({ cardItems }) => {
       />
       <div>
         <TextareaAutosize
-          minRows="17"
-          maxRows="17"
+          minRows="16"
+          maxRows="16"
           defaultValue={`${checkBody(cardItems.body)}`}
           placeholder="Type here"
           className="flex textarea h-full w-full resize-none p-4"

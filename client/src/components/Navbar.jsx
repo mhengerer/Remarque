@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { ADD_SPREAD } from "../utils/mutations";
@@ -11,7 +11,6 @@ const getNextMonday = (dateString) => {
 
 const getPreviousMonday = (dateString) => {
   const day = new Date(dateString);
-  console.log(day.getUTCDate());
   const dayOfWeek = day.getDay();
   const daysSinceMonday = (dayOfWeek + 6) % 7;
   const mondaysDate = new Date(
@@ -23,10 +22,11 @@ const getPreviousMonday = (dateString) => {
 };
 
 const Navbar = ({ allSpreads, currentSpread }) => {
-  console.log(allSpreads);
-  console.log(currentSpread);
-  const [addSpread] = useMutation(ADD_SPREAD);
+  const [addSpread, { data, loading, error }] = useMutation(ADD_SPREAD);
+  const [newSpread, setNewSpread] = useState("");
+
   const mondaysDate = getNextMonday(currentSpread.monday);
+  console.log(mondaysDate);
   const lastMondaysDate = getPreviousMonday(currentSpread.monday);
   return (
     <div className="navbar bg-gradient-to-r from-primary to-secondary">
@@ -75,11 +75,11 @@ const Navbar = ({ allSpreads, currentSpread }) => {
             onClick={async (e) => {
               e.preventDefault();
               let foundMonday;
-              allSpreads.forEach((spread) => {
+              allSpreads.forEach(async (spread) => {
                 console.log("To check: " + spread.monday);
                 console.log("Check against: " + lastMondaysDate);
                 if (spread.monday === lastMondaysDate) {
-                  foundMonday = spread._id;
+                  foundMonday = spread;
                 }
               });
               if (foundMonday === undefined) {
@@ -88,11 +88,13 @@ const Navbar = ({ allSpreads, currentSpread }) => {
                     date: lastMondaysDate,
                   },
                 }).then((data) => {
-                  console.log(data);
-                  window.location.replace(`/?id=${data._id}`);
+                  setNewSpread(data);
+                  const newSpreadId = newSpread;
+                  setNewSpread(null);
+                  setTimeout(window.location.replace(`/${newSpreadId}`), 500);
                 });
               }
-              window.location.replace(`/?id=${foundMonday}`);
+              window.location.replace(`/${foundMonday._id}`);
             }}
           >
             <svg
@@ -111,7 +113,9 @@ const Navbar = ({ allSpreads, currentSpread }) => {
           </button>
           <li tabIndex={0}>
             <button className="btn btn-accent mx-3">
-              <h2 className="font-bold">This Week</h2>
+              <h2 className="font-bold">
+                {currentSpread.monday} - {currentSpread.sunday}
+              </h2>
             </button>
           </li>
           <button
@@ -119,11 +123,11 @@ const Navbar = ({ allSpreads, currentSpread }) => {
             onClick={async (e) => {
               e.preventDefault();
               let foundMonday;
-              allSpreads.forEach((spread) => {
+              allSpreads.forEach(async (spread) => {
                 console.log("To check: " + spread.monday);
                 console.log("Check against: " + mondaysDate);
                 if (spread.monday === mondaysDate) {
-                  foundMonday = spread._id;
+                  foundMonday = spread;
                 }
               });
               if (foundMonday === undefined) {
@@ -132,11 +136,13 @@ const Navbar = ({ allSpreads, currentSpread }) => {
                     date: mondaysDate,
                   },
                 }).then((data) => {
-                  console.log(data);
-                  window.location.replace(`/?id=${data._id}`);
+                  setNewSpread(data);
+                  const newSpreadId = newSpread;
+                  setNewSpread(null);
+                  setTimeout(window.location.replace(`/${newSpreadId}`), 500);
                 });
               }
-              window.location.replace(`/?id=${foundMonday}`);
+              window.location.replace(`/${foundMonday._id}`);
             }}
           >
             <svg
