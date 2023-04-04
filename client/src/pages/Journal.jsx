@@ -4,7 +4,6 @@ import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
 import Auth from "../utils/auth";
 import { ADD_SPREAD } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
 import { QUERY_SPREAD, QUERY_USER } from "../utils/queries";
 import { useParams } from "react-router-dom";
 
@@ -32,7 +31,6 @@ const Journal = () => {
         return spread._id === id;
       });
       currentSpread = currentSpread[0];
-
     }
     return (
       <div className="grid grid-flow-row">
