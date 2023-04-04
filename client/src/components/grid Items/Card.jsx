@@ -1,9 +1,11 @@
 import React from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import Dragger from "./Dragger";
 
 const Card = () => {
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">
+      <Dragger />
       <textarea
         type="text"
         placeholder="Title"
@@ -11,10 +13,10 @@ const Card = () => {
       />
       <div>
         <TextareaAutosize
-        minRows="13"
-        maxRows="13"
+        minRows="17"
+        maxRows="17"
         placeholder="Type here"
-        className="flex textarea h-full w-full resize-none"/>
+        className="flex textarea h-full w-full resize-none p-4"/>
       </div>
     </div>
   );

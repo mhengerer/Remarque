@@ -1,5 +1,6 @@
 import React from "react";
 import Weekday from "../Weekday";
+import Dragger from "./Dragger";
 
 const plannerItems = [
   {

@@ -3,6 +3,39 @@ import Auth from "../utils/auth";
 
 const Navbar = ({ allSpreads }) => {
   console.log(allSpreads);
+//   const [spread, setSpread] = useState(currentSpread);
+//   const spreadArray = [0,1,2,3,4,5,6,7,8];
+//   const currentSpread = spreadArray[4];
+
+//   const navPrev = (e) => {
+//     e.preventDefault();
+//     console.log("boof");
+
+// //     setSpread(spreadArray[i-1]);
+//    };
+
+//   const navNow = (e) => {
+//     e.preventDefault;
+//     console.log("beef");
+
+// //     setSpread(currentSpread)
+//   };
+
+//   const navNext = (e) => {
+//     e.preventDefault();
+//     console.log("biff");
+
+// //     setSpread(spreadArray[i+1]);
+//   };
+
+//   const navHere = (e) => {
+//     e.preventDefault();
+//     console.log("borf");
+//     console.log(e.target.value);
+
+//     setSpread(spreadArray[i])
+  //  };
+
   return (
     <div className="navbar bg-gradient-to-r from-primary to-secondary">
       <div className="navbar-start">
@@ -29,10 +62,13 @@ const Navbar = ({ allSpreads }) => {
           >
             <li>Table of Contents</li>
             <li>
-              <a>March 28th, 2023</a>
-            </li>
-            <li>
-              <a>March 20th, 2023</a>
+              {/* {spreadArray.map((spread) => {
+                return ( */}
+                  <button>
+                    <a>uuuh</a>
+                  </button>
+                {/* );
+              })} */}
             </li>
           </ul>
         </div>
@@ -58,7 +94,9 @@ const Navbar = ({ allSpreads }) => {
             </svg>
           </button>
           <li tabIndex={0}>
-            <h2 className="font-bold">This Week</h2>
+            <button className="btn btn-accent mx-3">
+              <h2 className="font-bold">This Week</h2>
+            </button>
           </li>
           <button className="btn btn-ghost">
             <svg
