@@ -4,9 +4,9 @@ import { useMutation } from "@apollo/client";
 import { ADD_SPREAD } from "../utils/mutations";
 
 const getNextMonday = (dateString) => {
-  const today = new Date(dateString);
-  const nextWeek = new Date(today.getDate() + 7);
-  return getPreviousMonday(nextWeek).toISOString().substring(0, 10);
+  let inputDate = new Date(dateString);
+  let sevenDaysLater = new Date(inputDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+  return sevenDaysLater.toISOString().slice(0, 10);
 };
 
 const getPreviousMonday = (dateString) => {
@@ -116,10 +116,8 @@ const Navbar = ({ allSpreads, currentSpread }) => {
                 console.log("Check against: " + mondaysDate);
                 if (spread.monday === mondaysDate) {
                   foundMonday = spread._id;
-                  console.log("Found");
                 }
               });
-              console.log(foundMonday);
               if (foundMonday === undefined) {
                 foundMonday = await addSpread({
                   variables: {
@@ -130,6 +128,7 @@ const Navbar = ({ allSpreads, currentSpread }) => {
                   window.location.replace(`/?id=${data._id}`);
                 });
               }
+              window.location.replace(`/?id=${foundMonday}`);
             }}
           >
             <svg
