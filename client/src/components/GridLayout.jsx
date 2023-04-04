@@ -27,6 +27,7 @@ const convertLayout = async (cardType, plannerItems) => {
 const Layout = ({ spread }) => {
   const [gridItems, setGridItems] = useState({});
   const [plannerItems, setPlannerItems] = useState({});
+  console.log(spread.plannerItems);
   const [items, setItems] = React.useState([
     {
       i: "0",
@@ -72,8 +73,6 @@ const Layout = ({ spread }) => {
       card: <Card cardItems={spread.gridItems[2]} />,
     },
   ]);
-
-  console.log(spread);
 
   return (
     <ResponsiveGridLayout
