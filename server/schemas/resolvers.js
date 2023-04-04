@@ -83,7 +83,34 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
-      return { token, user };
+      const date = new Date();
+      const dateString = date.toISOString().substring(0, 10);
+
+      let monday = getPreviousMonday(dateString);
+      let sunday = getNextSunday(dateString);
+      const week = sevenDay(monday);
+      const plannerItems = await createPlanner(week);
+      const { gridItems, layoutItems } = await createGridTemplate();
+      let layout = layoutItems;
+      const userId = user._id;
+
+      monday = monday.toISOString().substring(0, 10);
+      sunday = sunday.toISOString().substring(0, 10);
+      const spread = await Spread.create({
+        monday,
+        sunday,
+        plannerItems,
+        gridItems,
+        layout,
+        userId,
+      });
+      const firstSpread = spread._id;
+
+      await User.findByIdAndUpdate(user._id, {
+        $push: { spreads: spread },
+      }).populate("spreads")
+
+      return { token, user, firstSpread };
     },
     // Add new spread as a subdocument to user model
     // Takes in 3 parameters:

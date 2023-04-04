@@ -8,7 +8,6 @@ const spreadSchema = new Schema({
   monday: {
     type: String,
     required: true,
-    unique: true,
   },
   sunday: {
     type: String,
@@ -42,6 +41,15 @@ const spreadSchema = new Schema({
     required: true,
   },
 });
+
+spreadSchema.index(
+  {
+    userId: Schema.Types.ObjectId,
+  },
+  {
+    monday: Schema.Types.String,
+  }
+);
 
 const Spread = model("Spread", spreadSchema);
 
