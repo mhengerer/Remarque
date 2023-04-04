@@ -68,7 +68,7 @@ const Weekday = ({ id, body, weekday }) => {
   return (
     <div className="w-full grid grid-cols-1 grid-flow-row text-left border-4 border-base-300">
       <label className="label">
-        <span className=" text-white label-text">{`Today: ${getDayOfWeek(
+        <span className=" text-white label-text">{`${getDayOfWeek(
           weekday
         )}`}</span>
       </label>
