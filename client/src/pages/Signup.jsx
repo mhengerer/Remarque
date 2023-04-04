@@ -39,8 +39,8 @@ const Signup = () => {
     <div className="hero min-h-screen bg-gradient-to-r from-secondary to-primary">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Remarque</h1>
-      <h2 className="text-3xl mt-1 mb-5">simply put - a bullet journal application</h2>
+      <h1 className="text-5xl font-bold cursive-font">Remarque</h1>
+      <h2 className="text-3xl mt-4 mb-5">simply put - a bullet journal application</h2>
       
       <SplashScreen/>
     </div>

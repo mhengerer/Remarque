@@ -34,7 +34,7 @@ function Login(props) {
 <div className="hero min-h-screen bg-gradient-to-r from-primary to-secondary">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Welcome Back Bullet Planner,<br></br> Please Log In!</h1>
+      <h1 className="text-5xl cursive-font">Welcome Back Bullet Planner,<br></br> Please Log In!</h1>
     </div>
 
   <form onSubmit={handleFormSubmit}>
