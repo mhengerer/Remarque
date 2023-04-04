@@ -10,6 +10,13 @@ const Journal = (props) => {
   const [currentSpread, setCurrentSpread] = useState({});
   const [allSpreads, setAllSpreads] = useState({});
 
+  const checkLoggedIn = () => {
+    if (!Auth.loggedIn()) {
+      window.location.replace("/login");
+    }
+  };
+  checkLoggedIn();
+
   const { loading, error, data } = useQuery(QUERY_USER);
   const userData = data;
   console.log(loading);
@@ -19,13 +26,6 @@ const Journal = (props) => {
   if (!loading) {
     // setAllSpreads();
     // setCurrentSpread(data.user.spreads.slice(-1)[0]);
-
-    const checkLoggedIn = () => {
-      if (!Auth.loggedIn()) {
-        window.location.replace("/login");
-      }
-    };
-    checkLoggedIn();
 
     return (
       <div className="grid grid-flow-row">
