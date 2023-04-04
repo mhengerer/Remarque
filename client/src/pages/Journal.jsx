@@ -21,7 +21,7 @@ const Journal = () => {
 
   if (loading) return "Loading...";
   if (error) {
-    window.location.replace("/login");
+    return "error";
   }
 
   if (!loading) {

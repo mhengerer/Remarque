@@ -80,7 +80,7 @@ const resolvers = {
     // Create new user
     // QCed
     addUser: async (parent, args) => {
-      const user = await User.create(args);
+      let user = await User.create(args);
       const token = signToken(user);
 
       const date = new Date();
@@ -104,13 +104,17 @@ const resolvers = {
         layout,
         userId,
       });
-      const firstSpread = spread._id;
 
-      await User.findByIdAndUpdate(user._id, {
+      user = await User.findByIdAndUpdate(user._id, {
         $push: { spreads: spread },
-      }).populate("spreads")
+      });
 
-      return { token, user, firstSpread };
+      user = await User.findById(user._id).populate({
+        path: "spreads",
+        ref: "_id",
+      });
+
+      return { token, user };
     },
     // Add new spread as a subdocument to user model
     // Takes in 3 parameters:

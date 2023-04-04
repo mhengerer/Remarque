@@ -22,6 +22,9 @@ const Signup = () => {
         variables: { ...formState },
       });
 
+      console.log(data);
+      // Auth.setFirstSpread(data.addUser.spreads._id);
+
       Auth.login(data.addUser.token);
     } catch (err) {
       console.log(err);
@@ -30,7 +33,6 @@ const Signup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(formState);
     setFormState({
       ...formState,
       [name]: value,
