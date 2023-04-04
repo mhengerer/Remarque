@@ -162,11 +162,19 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    updatePlannerItem: async (parent, args, context) => {
+    updatePlannerItem: async (parent, { _id, body }, context) => {
       if (context.user) {
-        return await PlannerItem.findByIdAndUpdate(args._id, args, {
-          new: true,
-        });
+        return await PlannerItem.findByIdAndUpdate(
+          _id,
+          {
+            $set: {
+              body: body,
+            },
+          },
+          {
+            new: true,
+          }
+        );
       }
 
       throw new AuthenticationError("Not logged in");
