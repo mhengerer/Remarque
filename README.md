@@ -36,7 +36,7 @@
   <h3 align="center">Remarque</h3>
 
   <p align="center">
-    Simply a bullet journal application journal 
+    Simply a bullet journal application 
     <br />
     <a href="https://github.com/mhengerer/Remarque"><strong>Explore the docs »</strong></a>
     <br />
@@ -67,7 +67,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -79,8 +78,8 @@
 
 ## About The Project
 
-[![Remarque Screen Shot][product-screenshot]](https://remarque-bullet.herokuapp.com/)
-[![Remarque Screen Shot 2][product-screenshot2]](https://remarque-bullet.herokuapp.com/)
+![alt text](./client/public/remarqueheroku2.png)
+![alt text](./client/public/remarqueherokulogin.png)
 
 about remarque...
 
@@ -93,11 +92,9 @@ a list of major frameworks/libraries used to bootstrap your project
 - [![Vite][vite.js]][vite-url]
 - [![React][react.js]][react-url]
 - [![Tailwindcss][tailwindcss]][tailwindcss-url]
-- [![framer][framer]][framer-url]
 - [![JWT][jwt]][jwt-url]
 - [![Express.js][express.js]][express-url]
 - [![MongoDB][mongodb]][mongodb-url]
-- [![Redux][redux]][redux-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -121,18 +118,17 @@ This is an example of how to list things you need to use the software and how to
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone git@github.com:mhengerer/Remarque.git
    ```
 3. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
+4. Build page
+   ```sh
+   npm run develop
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -144,22 +140,6 @@ _Below is an example of how you can instruct your audience on installing and set
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-  - [ ] Chinese
-  - [ ] Spanish
-
-See the [open issues](https://github.com/mhengerer/Remarque/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -184,7 +164,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `MIT.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
