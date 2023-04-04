@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Weekday from "../Weekday";
 
-const Planner = ({ plannerItems }) => {
-  console.log(plannerItems);
+const Planner = (planner) => {
+  const [plannerItems, setPlannerItems] = useState("");
+
+  useEffect(() => {
+    if (planner) {
+      setPlannerItems(planner);
+      console.log(planner);
+    }
+  }, [planner]);
+
   return (
     <div className="w-full text-white grid grid-cols-1 grid-flow-row text-left">
       <Weekday />

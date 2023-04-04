@@ -54,10 +54,20 @@ const resolvers = {
     },
     spreadById: async (parent, { _id }, context) => {
       if (context.user) {
-        return await Spread.findById(_id)
-          .populate("gridItems")
-          .populate("plannerItems")
-          .populate("layout");
+        return await Spread.findById(_id).populate([
+          {
+            path: "gridItems",
+            populate: "_id",
+          },
+          {
+            path: "plannerItems",
+            populate: "_id",
+          },
+          {
+            path: "layout",
+            populate: "_id",
+          },
+        ]);
       }
     },
     userSpreads: async (parent, args, context) => {

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-const Card = ({ gridItems }) => {
+const Card = (gridItems, i) => {
   console.log(gridItems);
+
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">
       <textarea

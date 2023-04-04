@@ -1,43 +1,37 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
 import Auth from "../utils/auth";
 import { QUERY_DATE, QUERY_SPREAD, QUERY_USER } from "../utils/queries";
-import { useEffect } from "react";
 
-const Journal = () => {
+const Journal = (props) => {
   const [currentSpread, setCurrentSpread] = useState({});
   const [allSpreads, setAllSpreads] = useState({});
 
-  // Generates the user ID and a list of all their spreads
-  const useUserData = async () => {
-    const { loading, data } = await useQuery(QUERY_USER);
-    return data;
-  };
+  const { loading, error, data } = useQuery(QUERY_USER);
+  const userData = data;
+  console.log(loading);
+  if (loading) return "Loading...";
+  if (error) return "Error";
 
-  const userData = useUserData().then((data) => {
-    const allSpreads = data.user.spreads;
-    console.log(allSpreads);
-    setAllSpreads(allSpreads);
-    setCurrentSpread(allSpreads.slice(-1)[0]);
-    return data.user;
-  });
+  if (!loading) {
+    // setAllSpreads();
+    // setCurrentSpread(data.user.spreads.slice(-1)[0]);
 
-  const checkLoggedIn = () => {
-    if (!Auth.loggedIn()) {
-      window.location.replace("/login");
-    }
-  };
-  checkLoggedIn();
+    const checkLoggedIn = () => {
+      if (!Auth.loggedIn()) {
+        window.location.replace("/login");
+      }
+    };
+    checkLoggedIn();
 
-  if (userData)
     return (
       <div className="grid grid-flow-row">
-        <Navbar allSpreads={{ allSpreads }} />
+        <Navbar allSpreads={userData.user.spreads} />
         <div className="w-full text-left">
-          <GridLayout currentSpread={{ currentSpread }} />
+          <GridLayout spread={userData.user.spreads.slice(-1)[0]} />
         </div>
 
         <div className="sticky bottom-0 left-70 h-20 w-20">
@@ -47,6 +41,7 @@ const Journal = () => {
         <button></button>
       </div>
     );
+  }
 };
 
 export default Journal;
