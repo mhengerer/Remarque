@@ -13,10 +13,10 @@ const Card = () => {
       />
       <div>
         <TextareaAutosize
-        minRows="13"
-        maxRows="13"
+        minRows="17"
+        maxRows="17"
         placeholder="Type here"
-        className="flex textarea h-full w-full resize-none"/>
+        className="flex textarea h-full w-full resize-none p-4"/>
       </div>
     </div>
   );
