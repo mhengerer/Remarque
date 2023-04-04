@@ -10,9 +10,10 @@ import { useEffect } from "react";
 const Journal = () => {
   const [currentSpread, setCurrentSpread] = useState({});
   const [allSpreads, setAllSpreads] = useState({});
+
   // Generates the user ID and a list of all their spreads
   const useUserData = async () => {
-    const { loading, data } = useQuery(QUERY_USER);
+    const { loading, data } = await useQuery(QUERY_USER);
     return data;
   };
 

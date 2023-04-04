@@ -22,40 +22,26 @@ const styles = {
 //   this.setState({ layout });
 //   this.props.onLayoutChange(layout); // updates status display
 // };
-const convertLayout = async ({ layout, plannerItems }) => {
-  let convertedLayout = [];
-  console.log(layout);
-
-  for (const layoutItem in layout) {
-    const cardType = layoutItem.card;
-    let Card;
-    switch (cardType) {
-      case "planner":
-        Card = <Planner />;
-        break;
-      case "todo":
-        Card = <Todo />;
-        break;
-      default:
-        Card = <Card />;
-        break;
-    }
-    layoutItem.card = Card;
-    convertedLayout.push(layoutItem);
+const convertLayout = async (cardType, plannerItems) => {
+  let Card;
+  switch (cardType) {
+    case "planner":
+      Card = <Planner plannerItems={plannerItems} />;
+      break;
+    case "todo":
+      Card = <Todo />;
+      break;
+    default:
+      Card = <Card />;
+      break;
   }
-
-  return convertedLayout;
+  return Card;
 };
 
 const Layout = ({ currentSpread }) => {
-  const spread = currentSpread.currentSpread.currentSpread;
-  console.log(spread);
-  const gridItems = currentSpread.gridItems;
-  let layout;
-  if (currentSpread) {
-    layout = convertLayout(spread).then((data) => console.log(data));
-  }
-
+  const spread = currentSpread.currentSpread;
+  const layout = spread.layout;
+  const plannerItems = currentSpread.plannerItems;
   const [items, setItems] = React.useState([
     {
       i: "0",
@@ -69,44 +55,12 @@ const Layout = ({ currentSpread }) => {
       maxH: 6,
       card: <Planner />,
     },
-    {
-      i: "1",
-      x: 3,
-      y: 0,
-      w: 1,
-      h: 3,
-      minH: 3,
-      maxH: 3,
-      card: <Card />,
-    },
-    {
-      i: "2",
-      x: 4,
-      y: 0,
-      w: 1,
-      h: 3,
-      minH: 3,
-      maxH: 3,
-      card: <Card />,
-    },
+    { i: "1", x: 3, y: 0, w: 1, h: 3, minH: 3, maxH: 3, card: <Card /> },
+    { i: "2", x: 4, y: 0, w: 1, h: 3, minH: 3, maxH: 3, card: <Card /> },
+    { i: "3", x: 2, y: 4, w: 2, h: 2, card: <Table /> },
     { i: "4", x: 2, y: 0, w: 3, h: 3, card: <Todo /> },
-    {
-      i: "5",
-      x: 2,
-      y: 0,
-      w: 1,
-      h: 3,
-      minH: 3,
-      maxH: 3,
-      card: <Card />,
-    },
+    { i: "5", x: 2, y: 0, w: 1, h: 3, minH: 3, maxH: 3, card: <Card /> },
   ]);
-
-  // useEffect(() => {
-  //   if (spread) {
-  //     setItems(spread);
-  //   }
-  // }, [spread]);
 
   return (
     <ResponsiveGridLayout
