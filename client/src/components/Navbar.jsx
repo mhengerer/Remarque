@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { ADD_SPREAD } from "../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 const getNextMonday = (dateString) => {
   let inputDate = new Date(dateString);
@@ -24,10 +25,20 @@ const getPreviousMonday = (dateString) => {
 const Navbar = ({ allSpreads, currentSpread }) => {
   const [addSpread, { data, loading, error }] = useMutation(ADD_SPREAD);
   const [newSpread, setNewSpread] = useState("");
+  const [header, setHeader] = useState(
+    `${currentSpread.monday} - ${currentSpread.sunday}`
+  );
 
   const mondaysDate = getNextMonday(currentSpread.monday);
-  console.log(mondaysDate);
   const lastMondaysDate = getPreviousMonday(currentSpread.monday);
+
+  const routeChange = (e) => {
+    setNewSpread(e.target.key);
+    const newSpreadId = newSpread;
+    setNewSpread("");
+    window.location.replace(`/${newSpreadId}`);
+  };
+
   return (
     <div className="navbar bg-gradient-to-r from-primary to-secondary">
       <div className="navbar-start">
@@ -53,15 +64,16 @@ const Navbar = ({ allSpreads, currentSpread }) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>Table of Contents</li>
-            <li>
-              {/* {spreadArray.map((spread) => {
-                return ( */}
-              <button>
-                <a>uuuh</a>
-              </button>
-              {/* );
-              })} */}
-            </li>
+
+            {allSpreads.map((spread) => {
+              return (
+                <li key={spread._id}>
+                  <button onClick={routeChange} key={spread._id}>
+                    <a href={spread._id}>{spread.monday}</a>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <button className="btn btn-ghost normal-case hidden lg:flex text-xl">
@@ -113,9 +125,7 @@ const Navbar = ({ allSpreads, currentSpread }) => {
           </button>
           <li tabIndex={0}>
             <button className="btn btn-accent mx-3">
-              <h2 className="font-bold">
-                {currentSpread.monday} - {currentSpread.sunday}
-              </h2>
+              <h2 className="font-bold">{header}</h2>
             </button>
           </li>
           <button
