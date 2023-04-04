@@ -25,14 +25,14 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // This code makes the GraphQL server work
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-// });
-
-// This code makes Heroku work
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
+
+// This code makes Heroku work
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+// });
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {

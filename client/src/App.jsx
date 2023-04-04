@@ -43,8 +43,8 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            {/* TODO: Update this route to be /spreads/_id */}
             <Route path="/" element={<Journal />} />
+            <Route path="/:spreadId" element={<Journal />} />
           </Routes>
         </div>
       </Router>
