@@ -23,7 +23,7 @@ const Todo = () => {
             <tr>
               <th>1</th>
               <td>
-                <textarea className="textarea textarea-ghost"></textarea>
+                <textarea className="textarea textarea-ghost text-xl handwriting-font"></textarea>
               </td>
               <td>
                 <div className="rating">
@@ -62,7 +62,7 @@ const Todo = () => {
             <tr>
               <th>2</th>
               <td>
-                <textarea className="textarea textarea-ghost"></textarea>
+                <textarea className="textarea textarea-ghost text-xl handwriting-font"></textarea>
               </td>
               <td>
                 <div className="rating">
@@ -101,7 +101,7 @@ const Todo = () => {
             <tr>
               <th>3</th>
               <td>
-                <textarea className="textarea textarea-ghost"></textarea>
+                <textarea className="textarea textarea-ghost text-xl handwriting-font"></textarea>
               </td>
               <td>
                 <div className="rating">

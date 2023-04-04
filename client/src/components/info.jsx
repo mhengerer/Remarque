@@ -2,6 +2,7 @@ import React from "react";
 import animation1 from "../assets/animation1.gif";
 import animation2 from "../assets/animation2.gif";
 import animation3 from "../assets/animation3.gif";
+
 const InfoModal = () => {
   return (
     <div>
@@ -25,21 +26,21 @@ const InfoModal = () => {
 
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box bg-white">
-          <h3 className="font-bold text-xl">Congratulations!</h3>
+        <div className="modal-box bg-white items-center">
+          <h3 className="font-bold text-xl cursive-font">Congratulations!</h3>
           <p className="py-2">I see organization in your future🔮</p>
           <p className="font-bold text-m">This is how you can customize your journal:</p>
           <div className="text-primary">
-            <p className="font-bold text-lg m-5">
+            <p className="font-bold text-2xl m-5 handwriting-font">
               Move the provided boxes to your liking.
               <img src={animation1} alt="Gif Demonstrating Dragability" />
             </p>
-            <p className="font-bold text-lg m-5">
+            <p className="font-bold text-2xl m-5 handwriting-font">
               Add text to text areas.
               <img src={animation3} alt="Gif Demonstrating Adding Text" />
             </p>
 
-            <p className="font-bold text-lg m-5">
+            <p className="font-bold text-2xl m-5 handwriting-font">
               Resize the boxes to your liking.
               <img src={animation2} alt="Gif Demonstrating Resizing Cards" />
             </p>

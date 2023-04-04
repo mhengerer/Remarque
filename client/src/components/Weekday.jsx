@@ -66,7 +66,7 @@ const Weekday = ({ id, body, weekday }) => {
         minRows="3"
         defaultValue={`${checkBody(body)}`}
         placeholder="Type here"
-        className="flex textarea textarea-bordered w-full resize-none"
+        className="flex textarea textarea-bordered w-full resize-none text-xl handwriting-font"
         onChange={handleChange}
       />
       <button className="justify-items-end" onClick={handleSubmit}>
