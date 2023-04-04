@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Weekday from "../Weekday";
 import Dragger from "./Dragger";
 
-const Planner = (planner) => {
-
 const plannerItemsTest = [
   {
     _id: "642b2bd21630e15cfcc7b2d2",
@@ -47,6 +45,7 @@ const Planner = ({ plannerItems }) => {
       {plannerItems.map((item) => (
         <Weekday
           key={item._id}
+          id={item._id}
           body={item.body}
           weekday={item.dayOfCurrentWeek}
         />

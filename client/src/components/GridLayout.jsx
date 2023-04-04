@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { Planner, Card, Todo} from "./grid Items/index.js";
+import { Planner, Card, Todo } from "./grid Items/index.js";
 import "../../node_modules/react-grid-layout/css/styles.css";
 import "../../node_modules/react-resizable/css/styles.css";
 import { QUERY_SPREAD } from "../utils/queries.js";
@@ -48,7 +48,7 @@ const Layout = ({ spread }) => {
       h: 3,
       minH: 3,
       maxH: 3,
-      card: <Card cardItems={spread.gridItems} i="1" />,
+      card: <Card cardItems={spread.gridItems[0]} />,
     },
     {
       i: "2",
@@ -58,18 +58,18 @@ const Layout = ({ spread }) => {
       h: 3,
       minH: 3,
       maxH: 3,
-      card: <Card cardItems={spread.gridItems} i="2" />,
+      card: <Card cardItems={spread.gridItems[1]} />,
     },
-    { i: "4", x: 2, y: 0, w: 3, h: 3, card: <Todo i="4" /> },
+    { i: "3", x: 2, y: 0, w: 3, h: 3, card: <Todo /> },
     {
-      i: "5",
+      i: "4",
       x: 2,
       y: 0,
       w: 1,
       h: 3,
       minH: 3,
       maxH: 3,
-      card: <Card cardItems={spread.gridItems} i="5" />,
+      card: <Card cardItems={spread.gridItems[2]} />,
     },
   ]);
 
