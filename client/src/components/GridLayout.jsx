@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { Planner, Card, Table, Todo } from "./grid Items/index.js";
+import { Planner, Card, Todo} from "./grid Items/index.js";
 import "../../node_modules/react-grid-layout/css/styles.css";
 import "../../node_modules/react-resizable/css/styles.css";
 import { QUERY_SPREAD } from "../utils/queries.js";
@@ -81,10 +81,11 @@ const Layout = ({ spread }) => {
       layouts={{ lg: items }}
       breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
       cols={{ lg: 5, md: 4, sm: 3, xs: 2, xxs: 1 }}
-      rowHeight={146}
+      rowHeight={189}
       width={1000}
       margin={[0, 0]}
       resizeHandles={["se"]}
+      draggableHandle={".dragHandle"}
       // onLayoutChange={saveLayout()}
     >
       {items.map((item) => {

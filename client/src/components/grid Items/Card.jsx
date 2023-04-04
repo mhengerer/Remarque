@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import Dragger from "./Dragger";
 
 const Card = (gridItems, i) => {
   console.log(gridItems);
 
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">
+      <Dragger />
       <textarea
         type="text"
         placeholder="Title"
@@ -13,11 +15,10 @@ const Card = (gridItems, i) => {
       />
       <div>
         <TextareaAutosize
-          minRows="13"
-          maxRows="13"
-          placeholder="Type here"
-          className="flex textarea h-full w-full resize-none"
-        />
+        minRows="17"
+        maxRows="17"
+        placeholder="Type here"
+        className="flex textarea h-full w-full resize-none p-4"/>
       </div>
     </div>
   );
