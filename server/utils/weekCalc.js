@@ -69,7 +69,6 @@ module.exports = {
         title: "Note",
         body: "",
         i: layout.i,
-        card: layout.card,
       });
       gridItems.push(gridObj);
 
@@ -83,6 +82,7 @@ module.exports = {
         maxW: layout.maxW,
         minH: layout.minH,
         maxH: layout.maxH,
+        card: layout.card,
       });
 
       layoutItems.push(layoutObj);

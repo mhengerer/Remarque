@@ -25,6 +25,7 @@ const typeDefs = gql`
     maxW: Int
     minH: Int
     maxH: Int
+    card: String
   }
 
   type Spread {

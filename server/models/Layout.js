@@ -37,6 +37,9 @@ const layoutSchema = new Schema({
   maxH: {
     type: Number,
   },
+  card: {
+    type: String,
+  },
 });
 
 const Layout = model("Layout", layoutSchema);

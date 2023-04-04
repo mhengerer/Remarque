@@ -39,10 +39,17 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_SPREAD = gql`
-  query getSpread($id: ID) {
+  query SpreadById($id: ID) {
     spreadById(_id: $id) {
       _id
+      gridItems {
+        _id
+        title
+        body
+        i
+      }
       monday
+      sunday
       plannerItems {
         _id
         body
@@ -50,23 +57,18 @@ export const QUERY_SPREAD = gql`
       }
       layout {
         _id
-        h
         i
-        maxH
-        maxW
-        minH
-        minW
-        w
         x
         y
+        w
+        h
+        minW
+        maxW
+        minH
+        maxH
+        card
       }
-      gridItems {
-        _id
-        body
-        i
-        title
-      }
-      sunday
+      userId
     }
   }
 `;

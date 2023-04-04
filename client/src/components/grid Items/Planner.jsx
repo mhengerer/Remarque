@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Weekday from "../Weekday";
 import Dragger from "./Dragger";
 
-const plannerItems = [
+const Planner = (planner) => {
+
+const plannerItemsTest = [
   {
     _id: "642b2bd21630e15cfcc7b2d2",
     body: "Testsdafasgddfasdfasdfsd",
@@ -39,7 +41,7 @@ const plannerItems = [
     dayOfCurrentWeek: 6,
   },
 ];
-const Planner = () => {
+const Planner = ({ plannerItems }) => {
   return (
     <div className="w-full text-white grid grid-cols-1 grid-flow-row text-left">
       {plannerItems.map((item) => (

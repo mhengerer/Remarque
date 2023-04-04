@@ -13,10 +13,6 @@ const gridItemSchema = new Schema({
       type: String,
     },
   ],
-  card: {
-    type: String,
-    required: true,
-  },
   // i: Grid item property for referencing
   // Coordinates of the item on the grid
   // x: Columns
