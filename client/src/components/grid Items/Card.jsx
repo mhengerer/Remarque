@@ -1,7 +1,8 @@
 import React from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-const Card = () => {
+const Card = ({ gridItems }) => {
+  console.log(gridItems);
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">
       <textarea
@@ -11,10 +12,11 @@ const Card = () => {
       />
       <div>
         <TextareaAutosize
-        minRows="13"
-        maxRows="13"
-        placeholder="Type here"
-        className="flex textarea h-full w-full resize-none"/>
+          minRows="13"
+          maxRows="13"
+          placeholder="Type here"
+          className="flex textarea h-full w-full resize-none"
+        />
       </div>
     </div>
   );

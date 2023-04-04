@@ -1,7 +1,8 @@
 import React from "react";
 import Weekday from "../Weekday";
 
-const Planner = () => {
+const Planner = ({ plannerItems }) => {
+  console.log(plannerItems);
   return (
     <div className="w-full text-white grid grid-cols-1 grid-flow-row text-left">
       <Weekday />
