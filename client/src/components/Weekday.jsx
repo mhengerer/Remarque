@@ -9,28 +9,34 @@ import { UPDATE_PLANNERITEM } from "../utils/mutations";
 // date function
 const Weekday = ({ id, body, weekday }) => {
   // const [textArea, setTextArea] = useState("");
-  const [updatePlannerItem, { error }] = useMutation(UPDATE_PLANNERITEM);
+  const [updatePlannerItem] = useMutation(UPDATE_PLANNERITEM);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    console.log(bodyState);
     try {
-      const plannerItem = await updatePlannerItem({ id, body: bodyState });
+      const plannerItem = await updatePlannerItem({
+        variables: {
+          id: id,
+          body: bodyState,
+        },
+      });
       console.log(plannerItem);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   console.log(id);
+
   console.log(body);
   console.log(weekday);
 
   const [bodyState, setBodyState] = useState("");
 
   const handleChange = (e) => {
-    const { body } = e.target;
-
-    setBodyState(body);
+    const { value } = e.target;
+    console.log(value);
+    setBodyState(value);
   };
 
   function checkBody(b) {
@@ -74,7 +80,7 @@ const Weekday = ({ id, body, weekday }) => {
         className="flex textarea textarea-bordered w-full resize-none"
         onChange={handleChange}
       />
-      <button className="justify-items-end" onSubmit={handleSubmit}>
+      <button className="justify-items-end" onClick={handleSubmit}>
         <FaRegSave />
       </button>
     </div>

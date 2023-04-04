@@ -40,7 +40,7 @@ export const UPDATE_GRIDITEM = gql`
 `;
 
 export const UPDATE_PLANNERITEM = gql`
-  mutation Mutation($id: ID, $body: String) {
+  mutation UpdatePlannerItem($id: ID, $body: String) {
     updatePlannerItem(_id: $id, body: $body) {
       _id
       body
