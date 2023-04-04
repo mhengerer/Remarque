@@ -9,7 +9,6 @@ const Planner = ({ plannerItems }) => {
         <Weekday
           id={item._id}
           key={item._id}
-          id={item._id}
           body={item.body}
           weekday={item.dayOfCurrentWeek}
         />
