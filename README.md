@@ -79,25 +79,16 @@
 
 ## About The Project
 
-[![Remarque Screen Shot][product-screenshot]](https://example.com)
+[![Remarque Screen Shot][product-screenshot]](https://remarque-bullet.herokuapp.com/)
+[![Remarque Screen Shot 2][product-screenshot2]](https://remarque-bullet.herokuapp.com/)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-
-- Your time should be focused on creating something amazing. A project that solves a problem and helps others
-- You shouldn't be doing the same tasks over and over like creating a README from scratch
-- You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+about remarque...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+a list of major frameworks/libraries used to bootstrap your project
 
 - [![Vite][vite.js]][vite-url]
 - [![React][react.js]][react-url]
@@ -201,9 +192,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/mhengerer/Remarque](https://github.com/mhengerer/Remarque)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -239,7 +228,8 @@ Use this space to list resources you find helpful and would like to give credit 
 [cr-url]: https://github.com/mhengerer/Remarque/pulls?q=is%3Apr+is%3Aclosed
 [license-shield]: https://img.shields.io/github/license/mhengerer/Remarque.svg?style=for-the-badge
 [license-url]: https://github.com/mhengerer/Remarque/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: client\public\remarqueherokulogin.png
+[product-screenshot2]: client\public\remarqueheroku2.png
 [vite.js]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
 [vite-url]: https://vitejs.dev/
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
