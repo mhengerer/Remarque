@@ -19,7 +19,7 @@ const getPreviousMonday = (dateString) => {
     day.getMonth(),
     day.getDate() - daysSinceMonday
   );
-  return mondaysDate;
+  return mondaysDate.toISOString().slice(0, 10);
 };
 
 const Navbar = ({ allSpreads, currentSpread }) => {
@@ -27,23 +27,7 @@ const Navbar = ({ allSpreads, currentSpread }) => {
   console.log(currentSpread);
   const [addSpread] = useMutation(ADD_SPREAD);
   const mondaysDate = getNextMonday(currentSpread.monday);
-  //   const navPrev = (e) => {
-  //     e.preventDefault();
-  //     console.log("boof");
-  //    };
-
-  //   const navNow = (e) => {
-  //     e.preventDefault;
-  //   };
-
-  //   const navHere = (e) => {
-  //     e.preventDefault();
-  //     console.log("borf");
-  //     console.log(e.target.value);
-
-  //     setSpread(spreadArray[i])
-  //  };
-
+  const lastMondaysDate = getPreviousMonday(currentSpread.monday);
   return (
     <div className="navbar bg-gradient-to-r from-primary to-secondary">
       <div className="navbar-start">
@@ -86,7 +70,31 @@ const Navbar = ({ allSpreads, currentSpread }) => {
       </div>
       <div className="navbar-center lg:flex">
         <ul className="menu menu-horizontal">
-          <button className="btn btn-ghost">
+          <button
+            className="btn btn-ghost"
+            onClick={async (e) => {
+              e.preventDefault();
+              let foundMonday;
+              allSpreads.forEach((spread) => {
+                console.log("To check: " + spread.monday);
+                console.log("Check against: " + lastMondaysDate);
+                if (spread.monday === lastMondaysDate) {
+                  foundMonday = spread._id;
+                }
+              });
+              if (foundMonday === undefined) {
+                foundMonday = await addSpread({
+                  variables: {
+                    date: lastMondaysDate,
+                  },
+                }).then((data) => {
+                  console.log(data);
+                  window.location.replace(`/?id=${data._id}`);
+                });
+              }
+              window.location.replace(`/?id=${foundMonday}`);
+            }}
+          >
             <svg
               aria-hidden="true"
               className="w-5 h-5 rotate-180"
