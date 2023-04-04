@@ -79,8 +79,6 @@
 
 ## About The Project
 
-[![Remarque Screen Shot][product-screenshot]](https://remarque-bullet.herokuapp.com/)
-[![Remarque Screen Shot 2][product-screenshot2]](https://remarque-bullet.herokuapp.com/)
 <a href="https://github.com/mhengerer/Remarque">
 <img src="client\public\remarqueherokulogin.png" alt="Product Screenshot of Login" width="auto" height="auto">
 </a>
