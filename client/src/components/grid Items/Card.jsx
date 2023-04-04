@@ -79,7 +79,7 @@ const Card = ({ cardItems }) => {
         type="text"
         placeholder="Title"
         defaultValue={`${checkTitle(cardItems.title)}`}
-        className="flex textarea textarea-bordered h-2 w-full text-center font-bold text-lg resize-none"
+        className="flex textarea textarea-bordered h-2 w-full text-center font-bold resize-none text-lg cursive-font"
         onChange={handleTitleChange}
       />
       <div>
@@ -88,7 +88,7 @@ const Card = ({ cardItems }) => {
           maxRows="16"
           defaultValue={`${checkBody(cardItems.body)}`}
           placeholder="Type here"
-          className="flex textarea h-full w-full resize-none p-4"
+          className="flex textarea h-full w-full resize-none p-4 text-xl handwriting-font"
           onChange={handleBodyChange}
         />
         <button className="justify-items-end" onClick={handleSubmit}>

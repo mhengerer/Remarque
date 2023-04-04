@@ -3,6 +3,7 @@ import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { ADD_SPREAD } from "../utils/mutations";
 import { useNavigate } from "react-router-dom";
+import Logo from "../../public/RemarqueSmallLogo.svg"
 
 const getNextMonday = (dateString) => {
   let inputDate = new Date(dateString);
@@ -76,9 +77,15 @@ const Navbar = ({ allSpreads, currentSpread }) => {
             })}
           </ul>
         </div>
-        <button className="btn btn-ghost normal-case hidden lg:flex text-xl">
+        
+        <button className="btn btn-ghost normal-case hidden lg:flex text-4xl cursive-font">
           Remarque
         </button>
+        <img
+                src={Logo}
+                alt="remarque logo"
+                className="w-10 h-11 mb-5 mt-3 place-self-center"
+              ></img>
       </div>
       <div className="navbar-center lg:flex">
         <ul className="menu menu-horizontal">
