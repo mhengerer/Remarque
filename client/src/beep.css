@@ -37,6 +37,14 @@
   }
 }
 
+.cursive-font {
+  font-family: "Pacifico", cursive;
+}
+
+.handwriting-font {
+  font-family: 'Reenie Beanie', cursive;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,48 +1,45 @@
-import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
-import React, { useState, useMemo } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import React from "react";
 import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
 import Auth from "../utils/auth";
-import { QUERY_USER } from "../utils/queries";
 import { ADD_SPREAD } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
+import { QUERY_SPREAD, QUERY_USER } from "../utils/queries";
+import { useParams } from "react-router-dom";
 
-const Journal = (props) => {
-  const [addSpread] = useMutation(ADD_SPREAD);
-
+const Journal = () => {
   const checkLoggedIn = () => {
     if (!Auth.loggedIn()) {
       window.location.replace("/login");
     }
   };
   checkLoggedIn();
+  let id = window.location.href.split("/")[3];
 
   const { loading, error, data } = useQuery(QUERY_USER);
-  let userData = data;
-  console.log(loading);
+  const userData = data;
+
   if (loading) return "Loading...";
-  if (error) return "Error";
+  if (error) {
+    window.location.replace("/login");
+  }
 
   if (!loading) {
-    if (error || userData === undefined) {
-      const today = new Date();
-      const year = today.getFullYear();
-      const month = (today.getMonth() + 1).toString().padStart(2, "0"); // add leading zero if month is less than 10
-      const day = today.getDate().toString().padStart(2, "0"); // add leading zero if day is less than 10
-
-      const currentDate = `${year}-${month}-${day}`;
-
-      const userData = addSpread({
-        variables: {
-          date: currentDate,
-        },
+    let currentSpread = userData.user.spreads.slice(-1)[0];
+    if (id) {
+      currentSpread = userData.user.spreads.filter((spread) => {
+        return spread._id === id;
       });
-      console.log(userData);
+      currentSpread = currentSpread[0];
+
     }
     return (
       <div className="grid grid-flow-row">
-        <Navbar allSpreads={userData.user.spreads} />
+        <Navbar
+          allSpreads={userData.user.spreads}
+          currentSpread={currentSpread}
+        />
         <div className="w-full text-left">
           <GridLayout spread={userData.user.spreads.slice(-1)[0]} />
         </div>

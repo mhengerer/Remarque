@@ -11,19 +11,19 @@ const SplashScreen = () => {
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Welcome to Remarque!</h3>
+          <h3 className="font-bold text-lg cursive-font">Welcome to Remarque!</h3>
           <p className="py-2">a digital format for bullet journaling.</p>
           <p className="font-bold text-sm">
             we ask that new users follow these steps:
           </p>
           <div>
             <ul className="steps steps-vertical">
-              <li className="step step-primary">Create an account</li>
-              <li className="step step-primary">Be sure to log in</li>
-              <li className="step step-primary">
+              <li className="step step-primary text-xl font-bold handwriting-font">Create an account</li>
+              <li className="step step-primary text-xl font-bold handwriting-font">Be sure to log in</li>
+              <li className="step step-primary text-xl font-bold handwriting-font">
                 Find the ⓘ to Learn How To Customize your Journal
               </li>
-              <li className="step step-primary">
+              <li className="step step-primary handwriting-font text-xl">
                 Begin your Digital Bullet Journal Dreams{" "}
               </li>
             </ul>

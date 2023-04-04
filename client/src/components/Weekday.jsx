@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useMutation } from "@apollo/client";
-
 import { FaRegSave } from "react-icons/fa";
-
 import { UPDATE_PLANNERITEM } from "../utils/mutations";
 
-// date function
 const Weekday = ({ id, body, weekday }) => {
-  // const [textArea, setTextArea] = useState("");
   const [updatePlannerItem] = useMutation(UPDATE_PLANNERITEM);
 
+
   const handleSubmit = async () => {
-    console.log(bodyState);
     try {
       const plannerItem = await updatePlannerItem({
         variables: {
@@ -20,22 +16,15 @@ const Weekday = ({ id, body, weekday }) => {
           body: bodyState,
         },
       });
-      console.log(plannerItem);
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(id);
-
-  console.log(body);
-  console.log(weekday);
-
   const [bodyState, setBodyState] = useState("");
 
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log(value);
     setBodyState(value);
   };
 
@@ -68,7 +57,7 @@ const Weekday = ({ id, body, weekday }) => {
   return (
     <div className="w-full grid grid-cols-1 grid-flow-row text-left border-4 border-base-300">
       <label className="label">
-        <span className=" text-white label-text">{`${getDayOfWeek(
+        <span className="label-text">{`${getDayOfWeek(
           weekday
         )}`}</span>
       </label>
