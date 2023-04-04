@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { LOGIN } from "../utils/mutations";
 import Auth from "../utils/auth";
+import Logo from "../../public/RemarqueSmallLogo.svg"
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -40,6 +41,7 @@ function Login(props) {
   <form onSubmit={handleFormSubmit}>
     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
       <div className="card-body">
+        <img src={Logo} alt="remarque logo" className="w-20 h-30 mb-5 place-self-center"></img>
         <h1 className="text-3xl font-bold">Log In Here!</h1>
         <div className="form-control">
           <label className="label">
