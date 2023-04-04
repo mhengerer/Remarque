@@ -11,6 +11,7 @@ const Signup = () => {
     email: "",
     password: "",
   });
+
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
@@ -37,68 +38,73 @@ const Signup = () => {
 
   return (
     <div className="hero min-h-screen bg-gradient-to-r from-secondary to-primary">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Remarque</h1>
-      <h2 className="text-3xl mt-1 mb-5">simply put - a bullet journal application</h2>
-      
-      <SplashScreen/>
-    </div>
-    <form onSubmit={handleFormSubmit}>
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div className="card-body">
-        <h1 className="text-3xl font-bold">Sign Up Here!</h1>
-        <div className="form-control">
-          <label htmlFor="username" className="label">
-            <span className="label-text">Username</span>
-          </label>
-          <input 
-            placeholder="username"
-            name="username"
-            type="text"
-            value={formState.name}
-            onChange={handleChange}
-            className="input input-bordered" />
-        </div>
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="text-center lg:text-left">
+          <h1 className="text-5xl font-bold">Remarque</h1>
+          <h2 className="text-3xl mt-1 mb-5">
+            simply put - a bullet journal application
+          </h2>
 
-        <div className="form-control">
-          <label htmlFor="email" className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input 
-            placeholder="email"
-            name="email"
-            type="email"
-            value={formState.email}
-            onChange={handleChange}
-            className="input input-bordered" />
+          <SplashScreen />
         </div>
+        <form onSubmit={handleFormSubmit}>
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card-body">
+              <h1 className="text-3xl font-bold">Sign Up Here!</h1>
+              <div className="form-control">
+                <label htmlFor="username" className="label">
+                  <span className="label-text">Username</span>
+                </label>
+                <input
+                  placeholder="username"
+                  name="username"
+                  type="text"
+                  value={formState.name}
+                  onChange={handleChange}
+                  className="input input-bordered"
+                />
+              </div>
 
-        <div className="form-control">
-          <label htmlFor="pwd" className="label">
-            <span className="label-text">Password</span>
-          </label>
-          <input 
-            placeholder="password"
-            name="password"
-            type="password"
-            value={formState.password}
-            onChange={handleChange} 
-            className="input input-bordered" />
-          
-        <Link to="/login" className="pt-5">← Go to Login</Link>
-        </div>
+              <div className="form-control">
+                <label htmlFor="email" className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  placeholder="email"
+                  name="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                  className="input input-bordered"
+                />
+              </div>
 
-        <div className="form-control mt-6">
-          <button className="btn btn-primary">Sign Up</button>
-        </div>
-        
+              <div className="form-control">
+                <label htmlFor="pwd" className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  placeholder="password"
+                  name="password"
+                  type="password"
+                  value={formState.password}
+                  onChange={handleChange}
+                  className="input input-bordered"
+                />
+
+                <Link to="/login" className="pt-5">
+                  ← Go to Login
+                </Link>
+              </div>
+
+              <div className="form-control mt-6">
+                <button className="btn btn-primary">Sign Up</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    </form>
-  </div>
-</div>
-
   );
 };
 

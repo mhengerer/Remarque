@@ -4,11 +4,12 @@ import React, { useState, useMemo } from "react";
 import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
 import Auth from "../utils/auth";
-import { QUERY_DATE, QUERY_SPREAD, QUERY_USER } from "../utils/queries";
+import { QUERY_USER } from "../utils/queries";
+import { ADD_SPREAD } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 const Journal = (props) => {
-  const [currentSpread, setCurrentSpread] = useState({});
-  const [allSpreads, setAllSpreads] = useState({});
+  const [addSpread] = useMutation(ADD_SPREAD);
 
   const checkLoggedIn = () => {
     if (!Auth.loggedIn()) {
@@ -18,15 +19,27 @@ const Journal = (props) => {
   checkLoggedIn();
 
   const { loading, error, data } = useQuery(QUERY_USER);
-  const userData = data;
+  let userData = data;
   console.log(loading);
   if (loading) return "Loading...";
   if (error) return "Error";
 
   if (!loading) {
-    // setAllSpreads();
-    // setCurrentSpread(data.user.spreads.slice(-1)[0]);
+    if (error || userData === undefined) {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = (today.getMonth() + 1).toString().padStart(2, "0"); // add leading zero if month is less than 10
+      const day = today.getDate().toString().padStart(2, "0"); // add leading zero if day is less than 10
 
+      const currentDate = `${year}-${month}-${day}`;
+
+      const userData = addSpread({
+        variables: {
+          date: currentDate,
+        },
+      });
+      console.log(userData);
+    }
     return (
       <div className="grid grid-flow-row">
         <Navbar allSpreads={userData.user.spreads} />
