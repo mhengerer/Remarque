@@ -1,14 +1,28 @@
-const { PlannerItem, GridItem } = require("../models");
-const { Card, Planner, Todo } = require("../components/grid Items");
+const checkTodaysDate = (date) => {
+  const today = new Date().toISOString.substring(0, 10);
+  const input = new Date(date).toISOString.substring(0, 10);
+
+  return today === input;
+};
+
+const getTodaysDate = () => {
+  return new Date().toISOString.substring(0, 10);
+};
+
+const getPreviousMonday = (dateString) => {
+  const day = new Date(dateString);
+  const dayOfWeek = day.getDay();
+  const daysSinceMonday = (dayOfWeek + 6) % 7;
+  const mondayDate = new Date(
+    day.getFullYear(),
+    day.getMonth(),
+    day.getDate() - daysSinceMonday
+  );
+  return mondayDate;
+};
 
 module.exports = {
-  checkTodaysDate: (date) => {
-    const today = new Date().toISOString.substring(0, 10);
-    const input = new Date(date).toISOString.substring(0, 10);
-
-    return today === input;
-  },
-  getTodaysDate: () => {
-    return new Date().toISOString.substring(0, 10);
-  },
+  checkTodaysDate,
+  getTodaysDate,
+  getPreviousMonday,
 };

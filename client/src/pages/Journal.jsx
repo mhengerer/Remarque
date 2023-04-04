@@ -1,15 +1,12 @@
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { GridLayout, Navbar } from "../components/index";
 import InfoModal from "../components/info";
 import Auth from "../utils/auth";
-import { QUERY_DATE, QUERY_SPREAD, QUERY_USER } from "../utils/queries";
+import {  QUERY_USER } from "../utils/queries";
 
-const Journal = (props) => {
-  const [currentSpread, setCurrentSpread] = useState({});
-  const [allSpreads, setAllSpreads] = useState({});
 
+const Journal = () => {
   const checkLoggedIn = () => {
     if (!Auth.loggedIn()) {
       window.location.replace("/login");
@@ -19,17 +16,17 @@ const Journal = (props) => {
 
   const { loading, error, data } = useQuery(QUERY_USER);
   const userData = data;
-  console.log(loading);
   if (loading) return "Loading...";
   if (error) return "Error";
 
   if (!loading) {
-    // setAllSpreads();
-    // setCurrentSpread(data.user.spreads.slice(-1)[0]);
 
     return (
       <div className="grid grid-flow-row">
-        <Navbar allSpreads={userData.user.spreads} />
+        <Navbar
+          allSpreads={userData.user.spreads}
+          currentSpread={userData.user.spreads.slice(-1)[0]}
+        />
         <div className="w-full text-left">
           <GridLayout spread={userData.user.spreads.slice(-1)[0]} />
         </div>

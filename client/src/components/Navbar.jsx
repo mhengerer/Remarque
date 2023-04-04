@@ -1,41 +1,33 @@
 import React from "react";
 import Auth from "../utils/auth";
+import { useMutation } from "@apollo/client";
+import { ADD_SPREAD } from "../utils/mutations";
 
-const Navbar = ({ allSpreads }) => {
+const getNextMonday = (dateString) => {
+  let inputDate = new Date(dateString);
+  let sevenDaysLater = new Date(inputDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+  return sevenDaysLater.toISOString().slice(0, 10);
+};
+
+const getPreviousMonday = (dateString) => {
+  const day = new Date(dateString);
+  console.log(day.getUTCDate());
+  const dayOfWeek = day.getDay();
+  const daysSinceMonday = (dayOfWeek + 6) % 7;
+  const mondaysDate = new Date(
+    day.getFullYear(),
+    day.getMonth(),
+    day.getDate() - daysSinceMonday
+  );
+  return mondaysDate.toISOString().slice(0, 10);
+};
+
+const Navbar = ({ allSpreads, currentSpread }) => {
   console.log(allSpreads);
-//   const [spread, setSpread] = useState(currentSpread);
-//   const spreadArray = [0,1,2,3,4,5,6,7,8];
-//   const currentSpread = spreadArray[4];
-
-//   const navPrev = (e) => {
-//     e.preventDefault();
-//     console.log("boof");
-
-// //     setSpread(spreadArray[i-1]);
-//    };
-
-//   const navNow = (e) => {
-//     e.preventDefault;
-//     console.log("beef");
-
-// //     setSpread(currentSpread)
-//   };
-
-//   const navNext = (e) => {
-//     e.preventDefault();
-//     console.log("biff");
-
-// //     setSpread(spreadArray[i+1]);
-//   };
-
-//   const navHere = (e) => {
-//     e.preventDefault();
-//     console.log("borf");
-//     console.log(e.target.value);
-
-//     setSpread(spreadArray[i])
-  //  };
-
+  console.log(currentSpread);
+  const [addSpread] = useMutation(ADD_SPREAD);
+  const mondaysDate = getNextMonday(currentSpread.monday);
+  const lastMondaysDate = getPreviousMonday(currentSpread.monday);
   return (
     <div className="navbar bg-gradient-to-r from-primary to-secondary">
       <div className="navbar-start">
@@ -64,10 +56,10 @@ const Navbar = ({ allSpreads }) => {
             <li>
               {/* {spreadArray.map((spread) => {
                 return ( */}
-                  <button>
-                    <a>uuuh</a>
-                  </button>
-                {/* );
+              <button>
+                <a>uuuh</a>
+              </button>
+              {/* );
               })} */}
             </li>
           </ul>
@@ -78,7 +70,31 @@ const Navbar = ({ allSpreads }) => {
       </div>
       <div className="navbar-center lg:flex">
         <ul className="menu menu-horizontal">
-          <button className="btn btn-ghost">
+          <button
+            className="btn btn-ghost"
+            onClick={async (e) => {
+              e.preventDefault();
+              let foundMonday;
+              allSpreads.forEach((spread) => {
+                console.log("To check: " + spread.monday);
+                console.log("Check against: " + lastMondaysDate);
+                if (spread.monday === lastMondaysDate) {
+                  foundMonday = spread._id;
+                }
+              });
+              if (foundMonday === undefined) {
+                foundMonday = await addSpread({
+                  variables: {
+                    date: lastMondaysDate,
+                  },
+                }).then((data) => {
+                  console.log(data);
+                  window.location.replace(`/?id=${data._id}`);
+                });
+              }
+              window.location.replace(`/?id=${foundMonday}`);
+            }}
+          >
             <svg
               aria-hidden="true"
               className="w-5 h-5 rotate-180"
@@ -98,7 +114,31 @@ const Navbar = ({ allSpreads }) => {
               <h2 className="font-bold">This Week</h2>
             </button>
           </li>
-          <button className="btn btn-ghost">
+          <button
+            className="btn btn-ghost"
+            onClick={async (e) => {
+              e.preventDefault();
+              let foundMonday;
+              allSpreads.forEach((spread) => {
+                console.log("To check: " + spread.monday);
+                console.log("Check against: " + mondaysDate);
+                if (spread.monday === mondaysDate) {
+                  foundMonday = spread._id;
+                }
+              });
+              if (foundMonday === undefined) {
+                foundMonday = await addSpread({
+                  variables: {
+                    date: mondaysDate,
+                  },
+                }).then((data) => {
+                  console.log(data);
+                  window.location.replace(`/?id=${data._id}`);
+                });
+              }
+              window.location.replace(`/?id=${foundMonday}`);
+            }}
+          >
             <svg
               aria-hidden="true"
               className="w-5 h-5"
