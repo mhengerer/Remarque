@@ -49,7 +49,7 @@ const Layout = ({ spread }) => {
       h: 3,
       minH: 3,
       maxH: 3,
-      card: <Card cardItems={spread.gridItems} i="1" />,
+      card: <Card cardItems={spread.gridItems[0]} />,
     },
     {
       i: "2",
@@ -59,9 +59,9 @@ const Layout = ({ spread }) => {
       h: 3,
       minH: 3,
       maxH: 3,
-      card: <Card cardItems={spread.gridItems} i="2" />,
+      card: <Card cardItems={spread.gridItems[1]} />,
     },
-    { i: "3", x: 2, y: 0, w: 3, h: 3, card: <Todo i="3" /> },
+    { i: "3", x: 2, y: 0, w: 3, h: 3, card: <Todo /> },
     {
       i: "4",
       x: 2,
@@ -70,7 +70,7 @@ const Layout = ({ spread }) => {
       h: 3,
       minH: 3,
       maxH: 3,
-      card: <Card cardItems={spread.gridItems} i="4" />,
+      card: <Card cardItems={spread.gridItems[2]} />,
     },
   ]);
 

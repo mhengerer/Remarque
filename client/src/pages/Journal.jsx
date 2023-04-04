@@ -5,20 +5,21 @@ import InfoModal from "../components/info";
 import Auth from "../utils/auth";
 import {  QUERY_USER } from "../utils/queries";
 
+
 const Journal = () => {
+  const checkLoggedIn = () => {
+    if (!Auth.loggedIn()) {
+      window.location.replace("/login");
+    }
+  };
+  checkLoggedIn();
+
   const { loading, error, data } = useQuery(QUERY_USER);
   const userData = data;
   if (loading) return "Loading...";
   if (error) return "Error";
 
   if (!loading) {
-
-    const checkLoggedIn = () => {
-      if (!Auth.loggedIn()) {
-        window.location.replace("/login");
-      }
-    };
-    checkLoggedIn();
 
     return (
       <div className="grid grid-flow-row">
