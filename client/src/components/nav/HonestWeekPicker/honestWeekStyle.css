@@ -1,0 +1,111 @@
+.week-picker-display {
+  width: 300px;
+  height: 20px;
+  color: #454545;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.5s ease;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .week-picker-display {
+    width: 240px;
+  }
+}
+
+.week-picker-options {
+  padding: 0.4rem;
+  position: absolute;
+  top: 105%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #c3c0cc;
+  display: flex;
+  overflow: hidden;
+  background: white;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-week {
+  padding: 0.8rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.numbers-container {
+  border-top: 1px solid gainsboro;
+  width: 100%;
+  padding: 0.3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.single-number {
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 0.8rem;
+  background: none;
+  color: black;
+  display: grid;
+  place-items: center;
+}
+
+.selected-week {
+  color: white;
+  background-color: #ff9900;
+}
+
+.other-month {
+  background: none;
+  color: #c3c0cc;
+}
+
+.day {
+  background: none;
+  color: black;
+}
+
+.arrow-container {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  transition: 0.2s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.arrow-container svg {
+  stroke: #454545;
+}
+
+.arrow-container:hover {
+  background-color: #ff9900;
+  border-radius: 15%;
+}
+
+.arrow-container:hover svg {
+  stroke: #fff;
+  fill: #fff;
+}
+
+.other-month {
+  background: none;
+  color: #c3c0cc;
+}

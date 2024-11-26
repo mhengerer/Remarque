@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 import { SplashScreen } from "../components/index";
-import Logo from "../../public/RemarqueSmallLogo.svg";
+import Logo from "../RemarqueSmallLogo.svg";
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -30,7 +30,6 @@ const Signup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(formState);
     setFormState({
       ...formState,
       [name]: value,

@@ -1,47 +1,33 @@
-const { PlannerItem, GridItem, Layout } = require("../models");
+const dayjs = require("dayjs");
+const {
+  Collection,
+  GridItem,
+  Layout,
+  PlannerItem,
+  User,
+} = require("../models");
 
 module.exports = {
-  getPreviousMonday: (dateString) => {
-    let today = new Date(dateString);
-    let currentDayOfWeek = today.getDay();
-    let oneDayInMilliseconds = 24 * 60 * 60 * 1000 - 4000;
-    let millisecondsSinceLastMonday =
-      (currentDayOfWeek - 1) * oneDayInMilliseconds;
-    if (currentDayOfWeek === 1) {
-      return today;
-    } else {
-      let lastMonday = new Date(today.getTime() - millisecondsSinceLastMonday);
-      return lastMonday;
-    }
-  },
-  getNextSunday: (dateString) => {
-    const dayObj = new Date(dateString);
-    const dayOfWeek = dayObj.getDay();
-    const daysUntilNextSunday = 7 - dayOfWeek;
-    const nextSunday = new Date(
-      dayObj.getTime() + daysUntilNextSunday * 24 * 60 * 60 * 1000 - 4000
-    );
-    return nextSunday;
-  },
-  sevenDay: (mon) => {
+  sevenDay: (monday) => {
     const daysOfWeek = [];
     for (let i = 0; i < 7; i++) {
-      const date = new Date(mon);
-      date.setDate(mon.getDate() + i);
-      const dayOfMonth = date.getDate();
-      daysOfWeek.push(dayOfMonth);
+      const weekday = monday.date(i);
+      daysOfWeek.push(dayjs(weekday));
     }
     return daysOfWeek;
   },
-  createPlanner: async (week) => {
-    let plannerItems = [];
-
-    for (day in week) {
-      const plannerItem = await PlannerItem.create({ dayOfCurrentWeek: day });
-      plannerItems.push(plannerItem);
+  createPlanner: async (week, userId) => {
+    let weeklyCollections = [];
+    for (let i = 0; i < 7; i++) {
+      const weekday = i;
+      const collection = await Collection.create({
+        userId: userId,
+        title: weekday,
+      });
+      weeklyCollections.push(collection);
     }
 
-    return plannerItems;
+    return weeklyCollections;
   },
   createGridTemplate: async () => {
     const template = [
@@ -65,8 +51,8 @@ module.exports = {
     let gridItems = [];
     let layoutItems = [];
 
-    for (let i = 0; i < template.length; i++) {
-      const layout = template[i];
+    for (const element of template) {
+      const layout = element;
       const gridObj = await GridItem.create({
         title: "Note",
         body: "",
@@ -91,5 +77,47 @@ module.exports = {
     }
 
     return { gridItems, layoutItems };
+  },
+  createTutorialEntries: async (spreadId, userId) => {
+    // Create Collections
+    let choresCollection = await Collection.create({
+      title: "Chores",
+      userId,
+    });
+    let choresId = choresCollection._id;
+
+    let selfCareCollection = await Collection.create({
+      title: "Self Care",
+      userId,
+    });
+    let selfCareId = selfCareCollection._id;
+
+    // Create Planner Items
+    const yoga = await PlannerItem.create({
+      title: "Yoga",
+      body: "Stretching helps set you up for a great day!",
+      scheduled: 48600, // 8:30am start of UNIX time
+      status: "O",
+      collections: [choresCollection._id],
+    });
+
+    const skincare = await PlannerItem.create({
+      title: "Skincare",
+      body: "Everybody needs it!",
+      scheduled: 51300, // 9:15am start of UNIX time
+      status: "O",
+      collections: [choresCollection._id, selfCareCollection._id],
+    });
+
+    // Update Collections with Planner Items
+    await Collection.findByIdAndUpdate(choresCollection._id, {
+      $push: { plannerItems: { $each: [yoga._id, skincare._id] } },
+    });
+
+    await Collection.findByIdAndUpdate(selfCareCollection._id, {
+      $push: { plannerItems: skincare._id },
+    });
+
+    return { choresId, selfCareId };
   },
 };

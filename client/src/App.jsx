@@ -7,7 +7,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import "./beep.css";
+import "./styles/beep.css";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -31,9 +31,6 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
-// TODO: Add a function to automatically either:
-// TODO: Route to this week's spread, or make one if there isn't one
 
 const App = () => {
   return (

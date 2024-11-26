@@ -1,6 +1,8 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+  scalar ISODate
+
   type GridItem {
     _id: ID
     title: String
@@ -10,8 +12,11 @@ const typeDefs = gql`
 
   type PlannerItem {
     _id: ID
+    title: String
     body: String
-    dayOfCurrentWeek: Int
+    scheduled: Int
+    status: String
+    collections: [ID]
   }
 
   type Layout {
@@ -28,11 +33,17 @@ const typeDefs = gql`
     card: String
   }
 
+  type Collection {
+    _id: ID
+    title: String!
+    plannerItems: [PlannerItem]
+    userId: ID!
+  }
+
   type Spread {
     _id: ID
     monday: String!
-    sunday: String!
-    plannerItems: [PlannerItem]!
+    weeklyCollections: [Collection]
     gridItems: [GridItem]!
     layout: [Layout]
     userId: ID!
@@ -44,6 +55,7 @@ const typeDefs = gql`
     email: String
     password: String
     spreads: [Spread]
+    collections: [Collection]
   }
 
   type Auth {
@@ -54,13 +66,15 @@ const typeDefs = gql`
   type Query {
     user: User
     allUsers: [User]
-    spread(date: String!): Spread
+    spread(date: String): Spread
     spreadById(_id: ID): Spread
     userSpreads: [Spread]
   }
 
   type Mutation {
     addSpread(date: String!): Spread
+    addCollection(title: String!): Collection
+    updateCollection(_id: ID, title: String): Collection
     updateSpread(_id: ID): Spread
     addGridItem(
       title: String!
@@ -73,8 +87,23 @@ const typeDefs = gql`
       spreadId: ID!
     ): GridItem
     updateGridItem(_id: ID!, title: String, body: [String], i: Int): GridItem
-    addPlannerItem(spreadId: ID!, body: String): PlannerItem
-    updatePlannerItem(_id: ID, body: String): PlannerItem
+    addPlannerItem(
+      title: String
+      body: String
+      scheduled: String
+      status: String
+      collections: [ID]
+    ): PlannerItem
+    updatePlannerItem(
+      _id: ID
+      title: String
+      body: String
+      scheduled: String
+      status: String
+      collections: [ID]
+    ): PlannerItem
+    deletePlannerItem(_id: ID!, collectionId: ID): Collection
+    deleteCollection(_id: ID!, collectionId: ID): Collection
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String, email: String, password: String): User
     login(email: String!, password: String!): Auth

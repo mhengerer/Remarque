@@ -20,7 +20,7 @@ module.exports = {
   //   },
   // },
   daisyui: {
-    themes: ["retro"],
+    themes: ["pastel"],
   },
   plugins: [require("daisyui")],
 };

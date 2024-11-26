@@ -1,13 +1,23 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React from "react";
-import { GridLayout, Navbar } from "../components/index";
-import InfoModal from "../components/info";
+import React, { useCallback, useState } from "react";
+import { GridLayout } from "../components/index";
+import { AddEntry } from "../components/entry/index";
+import { Navbar } from "../components/nav/index";
 import Auth from "../utils/auth";
-import { ADD_SPREAD } from "../utils/mutations";
-import { QUERY_SPREAD, QUERY_USER } from "../utils/queries";
-import { useParams } from "react-router-dom";
-
+import UpdateContext from "../components/UpdateContext";
+import { ADD_PLANNERITEM } from "../utils/mutations";
+import { QUERY_USER } from "../utils/queries";
 const Journal = () => {
+  const [update, setUpdate] = useState(0); // State for forcing update
+
+  const forceRerender = () => {
+    setUpdate((prev) => prev + 1); // Update the state to force rerender
+  };
+
+  const refetchData = () => {
+    refetch();
+  };
+
   const checkLoggedIn = () => {
     if (!Auth.loggedIn()) {
       window.location.replace("/login");
@@ -16,11 +26,12 @@ const Journal = () => {
   checkLoggedIn();
   let id = window.location.href.split("/")[3];
 
-  const { loading, error, data } = useQuery(QUERY_USER);
+  let { loading, error, data, refetch } = useQuery(QUERY_USER);
   const userData = data;
 
   if (loading) return "Loading...";
   if (error) {
+    console.log(error);
     window.location.replace("/login");
   }
 
@@ -32,22 +43,35 @@ const Journal = () => {
       });
       currentSpread = currentSpread[0];
     }
+
     return (
-      <div className="grid grid-flow-row">
-        <Navbar
-          allSpreads={userData.user.spreads}
-          currentSpread={currentSpread}
-        />
-        <div className="w-full text-left">
-          <GridLayout spread={userData.user.spreads.slice(-1)[0]} />
+      <UpdateContext.Provider value={{ update, setUpdate, forceRerender }}>
+        <div className="grid grid-flow-row content-center">
+          <Navbar
+            allSpreads={userData.user.spreads}
+            currentSpread={currentSpread}
+            className="align-center"
+          />
+          <div>
+            <GridLayout
+              allSpreads={userData.user.spreads}
+              currentSpread={currentSpread}
+              spread={userData.user.spreads.slice(-1)[0]}
+              userCollections={userData.user.collections}
+              userId={userData._id}
+              refetchData={refetchData}
+            />
+          </div>
+          <div className="fixed bottom-0 right-4 h-20 w-20">
+            <AddEntry
+              userCollections={userData.user.collections}
+              spreadCollections={currentSpread.weeklyCollections}
+              hidePlusLabel={false}
+              refetchData={refetchData}
+            ></AddEntry>
+          </div>
         </div>
-
-        <div className="sticky bottom-0 left-70 h-20 w-20">
-          <InfoModal />
-        </div>
-
-        <button></button>
-      </div>
+      </UpdateContext.Provider>
     );
   }
 };

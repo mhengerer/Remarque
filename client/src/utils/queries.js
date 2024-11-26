@@ -4,36 +4,40 @@ export const QUERY_USER = gql`
   query User {
     user {
       _id
+      username
+      email
+      password
       spreads {
         _id
         monday
-        sunday
-        plannerItems {
-          _id
-          body
-          dayOfCurrentWeek
-        }
-        gridItems {
+        weeklyCollections {
           _id
           title
-          body
-          i
-        }
-        layout {
-          _id
-          i
-          x
-          y
-          w
-          h
-          minW
-          maxW
-          minH
-          maxH
+          userId
+          plannerItems {
+            _id
+            title
+            body
+            scheduled
+            status
+            collections
+          }
         }
         userId
       }
-      username
+      collections {
+        _id
+        title
+        plannerItems {
+          _id
+          title
+          body
+          scheduled
+          status
+          collections
+        }
+        userId
+      }
     }
   }
 `;
@@ -42,31 +46,19 @@ export const QUERY_SPREAD = gql`
   query SpreadById($id: ID) {
     spreadById(_id: $id) {
       _id
-      gridItems {
+      monday
+      weeklyCollections {
         _id
         title
-        body
-        i
-      }
-      monday
-      sunday
-      plannerItems {
-        _id
-        body
-        dayOfCurrentWeek
-      }
-      layout {
-        _id
-        i
-        x
-        y
-        w
-        h
-        minW
-        maxW
-        minH
-        maxH
-        card
+        userId
+        plannerItems {
+          _id
+          title
+          body
+          scheduled
+          status
+          collections
+        }
       }
       userId
     }
@@ -77,6 +69,7 @@ export const USER_SPREADS = gql`
   query UserSpreads {
     userSpreads {
       _id
+      monday
     }
   }
 `;
